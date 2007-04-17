@@ -29,7 +29,7 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.16.1
+Version:	1.16.2
 Release: %mkrel 1
 License:	LGPL
 Group:		System/Internationalization
@@ -114,7 +114,6 @@ pango.
 %setup -q
 %patch -p1
 %patch5 -p1 -b .lib64
-touch *
 #needed by patch5
 aclocal-1.8
 automake-1.8
@@ -205,5 +204,3 @@ fi
 %{_libdir}/pkgconfig/*
 %attr(644,root,root) %{_libdir}/*.la
 %{_includedir}/*
-
-

@@ -29,7 +29,7 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.16.3
+Version:	1.16.4
 Release: %mkrel 1
 License:	LGPL
 Group:		System/Internationalization

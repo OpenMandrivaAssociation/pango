@@ -26,10 +26,11 @@
 %define module_version	1.6.0
 %define lib_major	0
 %define lib_name    %mklibname %{name} %{api_version} %{lib_major}
+%define libnamedev  %mklibname -d %{name} %{api_version} 
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.17.5
+Version:	1.18.0
 Release: %mkrel 1
 License:	LGPL
 Group:		System/Internationalization
@@ -91,7 +92,7 @@ A library to handle unicode strings as well as complex bidirectional
 or context dependent shaped strings.
 It is the next step on Gtk+ internationalization.
 
-%package -n %{lib_name}-devel
+%package -n %{libnamedev}
 Summary:  %{summary}
 Group: Development/GNOME and GTK+
 Obsoletes:	%{name}-devel
@@ -102,8 +103,9 @@ Requires:	%{name} = %{version}
 Requires:	%{lib_name} = %{version}
 Requires:	libglib2.0-devel >= %{req_glib_version}
 Requires:	freetype2-devel >= %{req_freetype2_version}
+Obsoletes: %mklibname -d %{name} %{api_version} %{lib_major}
 
-%description -n %{lib_name}-devel
+%description -n %{libnamedev}
 The pango-devel package includes the static libraries and header files
 for the pango package.
 
@@ -189,13 +191,13 @@ fi
 
 %files -n %{lib_name}
 %defattr(-,root,root)
-%{_libdir}/libpango-*.so.*
-%{_libdir}/libpangoft2-*.so.*
-%{_libdir}/libpangox-*.so.*
-%{_libdir}/libpangoxft-*.so.*
-%{_libdir}/libpangocairo*.so.*
+%{_libdir}/libpango-%{api_version}.so.%{lib_major}*
+%{_libdir}/libpangoft2-%{api_version}.so.%{lib_major}*
+%{_libdir}/libpangox-%{api_version}.so.%{lib_major}*
+%{_libdir}/libpangoxft-%{api_version}.so.%{lib_major}*
+%{_libdir}/libpangocairo-%{api_version}.so.%{lib_major}*
 
-%files -n %{lib_name}-devel
+%files -n %{libnamedev}
 %defattr(-, root, root)
 %{_libdir}/libpango-*.so
 %{_libdir}/libpangox-*.so

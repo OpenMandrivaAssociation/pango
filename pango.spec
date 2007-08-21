@@ -31,7 +31,7 @@
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.18.0
-Release: %mkrel 1
+Release: %mkrel 2
 License:	LGPL
 Group:		System/Internationalization
 URL:		http://www.pango.org/
@@ -51,10 +51,10 @@ BuildRequires: libxslt-proc docbook-style-xsl
 BuildRequires: automake1.8
 %endif
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{name}-%{version}.tar.bz2
-# gw fix make check
-Patch: pango-1.16.1-docs-check.patch
 # (gb) 1.4.0-2mdk biarch support
 Patch5:		pango-1.2.5-lib64.patch
+# (fc) 1.18.0-2mdv fix hang with very long string (GNOME bug #65536)
+Patch6:		pango-1.18.0-fixhang.patch
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
@@ -114,8 +114,8 @@ pango.
 
 %prep
 %setup -q
-%patch -p1
 %patch5 -p1 -b .lib64
+%patch6 -p1 -b .fixhang
 #needed by patch5
 aclocal-1.8
 automake-1.8

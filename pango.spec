@@ -31,7 +31,7 @@
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.18.0
-Release: %mkrel 2
+Release: %mkrel 3
 License:	LGPL
 Group:		System/Internationalization
 URL:		http://www.pango.org/
@@ -101,16 +101,20 @@ Provides:	lib%{name}-devel = %{version}-%{release}
 Provides:	lib%{name}%{api_version}-devel = %{version}-%{release}
 Requires:	%{name} = %{version}
 Requires:	%{lib_name} = %{version}
-Requires:	libglib2.0-devel >= %{req_glib_version}
-Requires:	freetype2-devel >= %{req_freetype2_version}
+Requires:	%{name}-doc >= %{version}
 Obsoletes: %mklibname -d %{name} %{api_version} %{lib_major}
+Conflicts:	%{name} < 1.18.0-3mdv
 
 %description -n %{libnamedev}
-The pango-devel package includes the static libraries and header files
+This package includes the static libraries and header files
 for the pango package.
 
-Install pango-devel if you want to develop programs which will use
-pango.
+%package doc
+Summary:  %{summary}
+Group: Development/GNOME and GTK+
+
+%description doc
+This package provides API documentation for Pango.
 
 %prep
 %setup -q
@@ -145,6 +149,9 @@ touch $RPM_BUILD_ROOT%{_sysconfdir}/pango/%{_arch}/pango.modules
 %ifarch %{biarches_32} %{biarches_64}
 mv $RPM_BUILD_ROOT%{_bindir}/pango-querymodules $RPM_BUILD_ROOT%{_bindir}/%{query_modules}
 %endif
+%ifarch %{biarches_64}
+mv $RPM_BUILD_ROOT%{_bindir}/pango-view $RPM_BUILD_ROOT%{_bindir}/pango-view%{query_modules_suffix}
+%endif
 
 cp -f pango/opentype/README README.opentype
 
@@ -167,9 +174,7 @@ fi
 %files
 %defattr(-, root, root)
 %doc README AUTHORS
-%doc NEWS ChangeLog
-%doc %{_datadir}/gtk-doc/html/pango
-%{_bindir}/pango-view
+%doc NEWS 
 %ifnarch %{biarches_32} %{biarches_64}
 %{_bindir}/pango-querymodules
 %endif
@@ -199,6 +204,7 @@ fi
 
 %files -n %{libnamedev}
 %defattr(-, root, root)
+%{_bindir}/pango-view*
 %{_libdir}/libpango-*.so
 %{_libdir}/libpangox-*.so
 %{_libdir}/libpangoxft-*.so
@@ -207,3 +213,8 @@ fi
 %{_libdir}/pkgconfig/*
 %attr(644,root,root) %{_libdir}/*.la
 %{_includedir}/*
+
+%files doc
+%doc %{_datadir}/gtk-doc/html/pango
+%doc ChangeLog
+%doc pango-view/HELLO.txt

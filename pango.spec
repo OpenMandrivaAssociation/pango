@@ -44,7 +44,7 @@ BuildRequires:libxft-devel >= 2.0
 %endif
 BuildRequires: fontconfig-devel >= %{req_fontconfig_version}
 BuildRequires: libcairo-devel >= %req_cairo_version
-BuildRequires: thai-devel >= 0.1.7
+BuildRequires: thai-devel >= 0.1.9
 %if %enable_gtkdoc
 BuildRequires: gtk-doc >= 0.10
 BuildRequires: libxslt-proc docbook-style-xsl
@@ -133,8 +133,7 @@ autoconf
 %make ARCH=%{_arch}
 
 %check
-#gw tests fail, see http://bugzilla.gnome.org/show_bug.cgi?id=410152
-#make check
+make check
 
 %install
 rm -rf $RPM_BUILD_ROOT

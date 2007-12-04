@@ -30,8 +30,8 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.19.0
-Release: %mkrel 2
+Version:	1.19.1
+Release: %mkrel 1
 License:	LGPL
 Group:		System/Internationalization
 URL:		http://www.pango.org/

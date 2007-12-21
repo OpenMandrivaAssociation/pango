@@ -54,6 +54,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{name}-%{version}.tar.bz2
 # (gb) 1.4.0-2mdk biarch support
 Patch5:		pango-1.2.5-lib64.patch
 
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 
 %description

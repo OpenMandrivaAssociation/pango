@@ -163,9 +163,13 @@ if [ "$1" = "2" -a -r  %{_sysconfdir}/pango/pango.modules ]; then
 fi
 %{_bindir}/%{query_modules} > %{_sysconfdir}/pango/%{_arch}/pango.modules
 
+%if %mdkversion < 200900
 %post -n %{lib_name} -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %postun -n %{lib_name} -p /sbin/ldconfig
+%endif
 
 %files
 %defattr(-, root, root)

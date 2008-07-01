@@ -30,9 +30,9 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.20.3
+Version:	1.20.4
 Release: %mkrel 1
-License:	LGPL
+License:	LGPLv2+
 Group:		System/Internationalization
 URL:		http://www.pango.org/
 BuildRequires: glib2-devel >= %{req_glib_version} 

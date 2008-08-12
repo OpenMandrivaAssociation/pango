@@ -20,7 +20,7 @@
 %define req_glib_version       2.9.0
 %define req_freetype2_version  2.1.3-4mdk
 %define req_fontconfig_version  2.1-4mdk
-%define req_cairo_version  1.2.2
+%define req_cairo_version  1.7.2
 
 %define api_version	1.0
 %define module_version	1.6.0
@@ -30,7 +30,7 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.21.3
+Version:	1.21.4
 Release: %mkrel 1
 License:	LGPLv2+
 Group:		System/Internationalization

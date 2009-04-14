@@ -47,7 +47,7 @@ BuildRequires: libcairo-devel >= %req_cairo_version
 BuildRequires: thai-devel >= 0.1.9
 %if %enable_gtkdoc
 BuildRequires: gtk-doc >= 0.10
-BuildRequires: libxslt-proc docbook-style-xsl
+BuildRequires: libxslt-proc docbook-style-xsl docbook-dtd412-xml
 BuildRequires: automake1.8
 %endif
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{name}-%{version}.tar.bz2

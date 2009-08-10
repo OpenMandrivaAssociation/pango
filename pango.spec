@@ -30,7 +30,7 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.24.5
+Version:	1.25.1
 Release: %mkrel 1
 License:	LGPLv2+
 Group:		System/Internationalization
@@ -130,7 +130,7 @@ autoconf
 	--enable-gtk-doc=yes \
 %endif
 
-%make ARCH=%{_arch}
+%make ARCH=%{_arch} LIBS=-lstdc++
 
 %check
 #gw http://bugzilla.gnome.org/show_bug.cgi?id=562100

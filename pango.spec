@@ -31,7 +31,7 @@
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.25.1
-Release: %mkrel 2
+Release: %mkrel 3
 License:	LGPLv2+
 Group:		System/Internationalization
 URL:		http://www.pango.org/
@@ -53,6 +53,8 @@ BuildRequires: automake1.8
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{name}-%{version}.tar.bz2
 # (gb) 1.4.0-2mdk biarch support
 Patch5:		pango-1.22.4-lib64.patch
+# (fc) 1.25.1-3mdv fix crash in FF (GNOME bug #591409) (GIT)
+Patch6:		pango-1.25.1-fixfirefoxcrash.patch
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
@@ -117,10 +119,9 @@ This package provides API documentation for Pango.
 %prep
 %setup -q
 %patch5 -p1 -b .lib64
+%patch6 -p1 -b .fixfirefoxcrash
 #needed by patch5
-aclocal-1.8
-automake-1.8
-autoconf
+autoreconf
 
 %build
 #gw remove exceptions:

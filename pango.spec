@@ -31,7 +31,7 @@
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.25.1
-Release: %mkrel 1
+Release: %mkrel 2
 License:	LGPLv2+
 Group:		System/Internationalization
 URL:		http://www.pango.org/
@@ -123,18 +123,18 @@ automake-1.8
 autoconf
 
 %build
-
+#gw remove exceptions:
+# http://bugzilla.gnome.org/show_bug.cgi?id=591413
+export CXXFLAGS="%(echo %optflags|sed s/-fexceptions//)"
 %configure2_5x \
 	--enable-static=no \
 %if %enable_gtkdoc
 	--enable-gtk-doc=yes \
 %endif
 
-%make ARCH=%{_arch} LIBS=-lstdc++
+%make ARCH=%{_arch}
 
 %check
-#gw http://bugzilla.gnome.org/show_bug.cgi?id=562100
-#docs check fails
 #make check
 
 %install

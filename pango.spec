@@ -30,7 +30,7 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.25.2
+Version:	1.25.3
 Release: %mkrel 1
 License:	LGPLv2+
 Group:		System/Internationalization
@@ -121,9 +121,6 @@ This package provides API documentation for Pango.
 autoreconf
 
 %build
-#gw remove exceptions:
-# http://bugzilla.gnome.org/show_bug.cgi?id=591413
-export CXXFLAGS="%(echo %optflags|sed s/-fexceptions//)"
 %configure2_5x \
 	--enable-static=no \
 %if %enable_gtkdoc

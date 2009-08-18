@@ -30,7 +30,7 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.25.3
+Version:	1.25.4
 Release: %mkrel 1
 License:	LGPLv2+
 Group:		System/Internationalization
@@ -45,6 +45,8 @@ BuildRequires:libxft-devel >= 2.0
 BuildRequires: fontconfig-devel >= %{req_fontconfig_version}
 BuildRequires: libcairo-devel >= %req_cairo_version
 BuildRequires: thai-devel >= 0.1.9
+#gw does not build in 1.25.4
+#BuildRequires: gobject-introspection-devel
 %if %enable_gtkdoc
 BuildRequires: gtk-doc >= 0.10
 BuildRequires: libxslt-proc docbook-style-xsl docbook-dtd412-xml

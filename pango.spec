@@ -30,7 +30,7 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.25.5
+Version:	1.25.6
 Release: %mkrel 1
 License:	LGPLv2+
 Group:		System/Internationalization
@@ -45,8 +45,7 @@ BuildRequires:libxft-devel >= 2.0
 BuildRequires: fontconfig-devel >= %{req_fontconfig_version}
 BuildRequires: libcairo-devel >= %req_cairo_version
 BuildRequires: thai-devel >= 0.1.9
-#gw does not build in 1.25.4
-#BuildRequires: gobject-introspection-devel
+BuildRequires: gobject-introspection-devel
 %if %enable_gtkdoc
 BuildRequires: gtk-doc >= 0.10
 BuildRequires: libxslt-proc docbook-style-xsl docbook-dtd412-xml
@@ -200,6 +199,15 @@ fi
 %{_libdir}/libpangox-%{api_version}.so.%{lib_major}*
 %{_libdir}/libpangoxft-%{api_version}.so.%{lib_major}*
 %{_libdir}/libpangocairo-%{api_version}.so.%{lib_major}*
+%_libdir/girepository-1.0/Pango-1.0.typelib
+%_libdir/girepository-1.0/PangoCairo-1.0.typelib
+%_libdir/girepository-1.0/PangoFT2-1.0.typelib
+%_libdir/girepository-1.0/PangoXft-1.0.typelib
+%_datadir/gir-1.0/Pango-1.0.gir
+%_datadir/gir-1.0/PangoCairo-1.0.gir
+%_datadir/gir-1.0/PangoFT2-1.0.gir
+%_datadir/gir-1.0/PangoXft-1.0.gir
+
 
 %files -n %{libnamedev}
 %defattr(-, root, root)

@@ -73,6 +73,7 @@ Requires: freetype2 >= %{req_freetype2_version}
 Requires: fontconfig >= %{req_fontconfig_version}
 Requires: glib2 >= %{req_glib_version}
 Requires:      %{lib_name}-modules = %{version}
+Conflicts: gir-repository < 0.6.5
 
 %package -n %{lib_name}-modules
 Summary:	%{summary}

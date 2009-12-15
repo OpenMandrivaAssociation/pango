@@ -30,7 +30,7 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.26.1
+Version:	1.26.2
 Release: %mkrel 1
 License:	LGPLv2+
 Group:		System/Internationalization
@@ -121,7 +121,7 @@ This package provides API documentation for Pango.
 %setup -q
 %patch5 -p1 -b .lib64
 #needed by patch5
-autoreconf
+autoreconf -fi
 
 %build
 %configure2_5x \

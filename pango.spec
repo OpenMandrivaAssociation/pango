@@ -30,7 +30,7 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.26.2
+Version:	1.27.1
 Release: %mkrel 1
 License:	LGPLv2+
 Group:		System/Internationalization
@@ -133,7 +133,8 @@ autoreconf -fi
 %make ARCH=%{_arch}
 
 %check
-make check
+#disabled for https://bugzilla.gnome.org/show_bug.cgi?id=610791
+#make check
 
 %install
 rm -rf $RPM_BUILD_ROOT

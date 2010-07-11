@@ -30,8 +30,8 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.28.0
-Release: %mkrel 1
+Version:	1.28.1
+Release:	%mkrel 1
 License:	LGPLv2+
 Group:		System/Internationalization
 URL:		http://www.pango.org/
@@ -49,7 +49,7 @@ BuildRequires: gobject-introspection-devel
 %if %enable_gtkdoc
 BuildRequires: gtk-doc >= 0.10
 BuildRequires: libxslt-proc docbook-style-xsl docbook-dtd412-xml
-BuildRequires: automake1.8
+#BuildRequires: automake1.8
 %endif
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{name}-%{version}.tar.bz2
 # (gb) 1.4.0-2mdk biarch support
@@ -134,29 +134,29 @@ autoreconf -fi
 
 %check
 #disabled for https://bugzilla.gnome.org/show_bug.cgi?id=610791
-#make check
+make check
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %makeinstall_std
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/pango/%{_arch}
-touch $RPM_BUILD_ROOT%{_sysconfdir}/pango/%{_arch}/pango.modules
+mkdir -p %{buildroot}%{_sysconfdir}/pango/%{_arch}
+touch %{buildroot}%{_sysconfdir}/pango/%{_arch}/pango.modules
 
 %ifarch %{biarches_32} %{biarches_64}
-mv $RPM_BUILD_ROOT%{_bindir}/pango-querymodules $RPM_BUILD_ROOT%{_bindir}/%{query_modules}
+mv %{buildroot}%{_bindir}/pango-querymodules %{buildroot}%{_bindir}/%{query_modules}
 %endif
 %ifarch %{biarches_64}
-mv $RPM_BUILD_ROOT%{_bindir}/pango-view $RPM_BUILD_ROOT%{_bindir}/pango-view%{query_modules_suffix}
+mv %{buildroot}%{_bindir}/pango-view %{buildroot}%{_bindir}/pango-view%{query_modules_suffix}
 %endif
 
 cp -f pango/opentype/README README.opentype
 
 # remove unpackaged files
-rm -f $RPM_BUILD_ROOT%{_libdir}/pango/%{module_version}/modules/*.la
+rm -f %{buildroot}%{_libdir}/pango/%{module_version}/modules/*.la
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %post -n %{lib_name}-modules
 if [ "$1" = "2" -a -r  %{_sysconfdir}/pango/pango.modules ]; then

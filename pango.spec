@@ -31,7 +31,7 @@
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.28.1
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	LGPLv2+
 Group:		System/Internationalization
 URL:		http://www.pango.org/
@@ -206,11 +206,6 @@ fi
 %_libdir/girepository-1.0/PangoCairo-1.0.typelib
 %_libdir/girepository-1.0/PangoFT2-1.0.typelib
 %_libdir/girepository-1.0/PangoXft-1.0.typelib
-%_datadir/gir-1.0/Pango-1.0.gir
-%_datadir/gir-1.0/PangoCairo-1.0.gir
-%_datadir/gir-1.0/PangoFT2-1.0.gir
-%_datadir/gir-1.0/PangoXft-1.0.gir
-
 
 %files -n %{libnamedev}
 %defattr(-, root, root)
@@ -223,6 +218,10 @@ fi
 %{_libdir}/pkgconfig/*
 %attr(644,root,root) %{_libdir}/*.la
 %{_includedir}/*
+%_datadir/gir-1.0/Pango-1.0.gir
+%_datadir/gir-1.0/PangoCairo-1.0.gir
+%_datadir/gir-1.0/PangoFT2-1.0.gir
+%_datadir/gir-1.0/PangoXft-1.0.gir
 
 %files doc
 %doc %{_datadir}/gtk-doc/html/pango

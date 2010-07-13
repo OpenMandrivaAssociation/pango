@@ -31,7 +31,7 @@
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.28.1
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	LGPLv2+
 Group:		System/Internationalization
 URL:		http://www.pango.org/
@@ -105,6 +105,7 @@ Requires:	%{lib_name} = %{version}
 Requires:	%{name}-doc >= %{version}
 Obsoletes: %mklibname -d %{name} %{api_version} %{lib_major}
 Conflicts:	%{name} < 1.18.0-3mdv
+Conflicts:	%{_lib}pango1.0_0 < 1.28.1-2
 
 %description -n %{libnamedev}
 This package includes the static libraries and header files

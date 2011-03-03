@@ -52,6 +52,7 @@ BuildRequires: libxslt-proc docbook-style-xsl docbook-dtd412-xml
 #BuildRequires: automake1.8
 %endif
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{name}-%{version}.tar.bz2
+Patch1:		pango-1.28.3-no_check_docs.diff
 # (gb) 1.4.0-2mdk biarch support
 Patch5:		pango-1.22.4-lib64.patch
 Patch6:		pango-1.26.1-CVE-2011-0020.diff
@@ -121,6 +122,7 @@ This package provides API documentation for Pango.
 
 %prep
 %setup -q
+%patch1 -p0 -b .no_check_docs
 %patch5 -p1 -b .lib64
 %patch6 -p0 -b .CVE-2011-0020
 %patch7 -p1 -b .CVE-2011-0064

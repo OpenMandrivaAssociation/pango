@@ -31,7 +31,7 @@
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.28.3
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	LGPLv2+
 Group:		System/Internationalization
 URL:		http://www.pango.org/
@@ -55,6 +55,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{name}-%{version}.tar.bz2
 # (gb) 1.4.0-2mdk biarch support
 Patch5:		pango-1.22.4-lib64.patch
 Patch6:		pango-1.26.1-CVE-2011-0020.diff
+Patch7:		pango-1.28.0-CVE-2011-0064.diff
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 
@@ -122,6 +123,7 @@ This package provides API documentation for Pango.
 %setup -q
 %patch5 -p1 -b .lib64
 %patch6 -p0 -b .CVE-2011-0020
+%patch7 -p1 -b .CVE-2011-0064
 
 
 #needed by patch5

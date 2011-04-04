@@ -17,7 +17,7 @@
 
 
 # Version of libraries required
-%define req_glib_version       2.17.3
+%define req_glib_version       2.24
 %define req_freetype2_version  2.1.3-4mdk
 %define req_fontconfig_version  2.5.0
 %define req_cairo_version  1.7.6
@@ -30,8 +30,8 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.28.3
-Release:	%mkrel 3
+Version:	1.28.4
+Release:	%mkrel 1
 License:	LGPLv2+
 Group:		System/Internationalization
 URL:		http://www.pango.org/
@@ -55,8 +55,6 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{name}-%{version}.tar.bz2
 Patch1:		pango-1.28.3-no_check_docs.diff
 # (gb) 1.4.0-2mdk biarch support
 Patch5:		pango-1.22.4-lib64.patch
-Patch6:		pango-1.26.1-CVE-2011-0020.diff
-Patch7:		pango-1.28.0-CVE-2011-0064.diff
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 
@@ -124,8 +122,6 @@ This package provides API documentation for Pango.
 %setup -q
 %patch1 -p0 -b .no_check_docs
 %patch5 -p1 -b .lib64
-%patch6 -p0 -b .CVE-2011-0020
-%patch7 -p1 -b .CVE-2011-0064
 
 
 #needed by patch5

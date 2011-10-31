@@ -30,8 +30,8 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.28.4
-Release:	%mkrel 4
+Version:	1.29.4
+Release:	1
 License:	LGPLv2+
 Group:		System/Internationalization
 URL:		http://www.pango.org/
@@ -49,13 +49,11 @@ BuildRequires: gobject-introspection-devel
 %if %enable_gtkdoc
 BuildRequires: gtk-doc >= 0.10
 BuildRequires: libxslt-proc docbook-style-xsl docbook-dtd412-xml
-#BuildRequires: automake1.8
 %endif
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{name}-%{version}.tar.xz
 Patch1:		pango-1.28.3-no_check_docs.diff
 # (gb) 1.4.0-2mdk biarch support
 Patch5:		pango-1.22.4-lib64.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 
 %description

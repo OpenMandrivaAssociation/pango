@@ -31,7 +31,7 @@
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.29.4
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Internationalization
 URL:		http://www.pango.org/
@@ -78,7 +78,7 @@ Conflicts: gir-repository < 0.6.5
 Summary:	%{summary}
 Group:		%{group}
 #need this since we launch pango-querymodules in %post
-Requires(post):                %{lib_name} = %{version}
+Requires(post):	%{lib_name} = %{version}
 Provides:	pango-modules = %{version}-%{release}
 
 %description -n %{lib_name}-modules
@@ -94,7 +94,7 @@ It is the next step on Gtk+ internationalization.
 %package -n %{libnamedev}
 Summary:  %{summary}
 Group: Development/GNOME and GTK+
-Obsoletes:	%{name}-devel
+Obsoletes:	%{name}-devel < %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
 Provides:	lib%{name}%{api_version}-devel = %{version}-%{release}
@@ -120,7 +120,6 @@ This package provides API documentation for Pango.
 %setup -q
 %patch1 -p0 -b .no_check_docs
 %patch5 -p1 -b .lib64
-
 
 #needed by patch5
 autoreconf -fi
@@ -157,8 +156,6 @@ cp -f pango/opentype/README README.opentype
 # remove unpackaged files
 rm -f %{buildroot}%{_libdir}/pango/%{module_version}/modules/*.la
 
-%clean
-rm -rf %{buildroot}
 
 %post -n %{lib_name}-modules
 if [ "$1" = "2" -a -r  %{_sysconfdir}/pango/pango.modules ]; then
@@ -175,7 +172,6 @@ fi
 %endif
 
 %files
-%defattr(-, root, root)
 %doc README AUTHORS
 %doc NEWS 
 %ifnarch %{biarches_32} %{biarches_64}
@@ -186,7 +182,6 @@ fi
 %config(noreplace) %{_sysconfdir}/pango/pango*.aliases
 
 %files -n %{lib_name}-modules
-%defattr(-, root, root)
 %ifarch %{biarches_32} %{biarches_64}
 %{_bindir}/pango-querymodules-*
 %endif
@@ -198,7 +193,6 @@ fi
 %ghost %verify (not md5 mtime size) %config(noreplace) %{_sysconfdir}/pango/%{_arch}/pango.modules
 
 %files -n %{lib_name}
-%defattr(-,root,root)
 %{_libdir}/libpango-%{api_version}.so.%{lib_major}*
 %{_libdir}/libpangoft2-%{api_version}.so.%{lib_major}*
 %{_libdir}/libpangox-%{api_version}.so.%{lib_major}*
@@ -210,7 +204,6 @@ fi
 %_libdir/girepository-1.0/PangoXft-1.0.typelib
 
 %files -n %{libnamedev}
-%defattr(-, root, root)
 %{_bindir}/pango-view*
 %{_libdir}/libpango-*.so
 %{_libdir}/libpangox-*.so

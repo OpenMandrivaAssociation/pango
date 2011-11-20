@@ -156,6 +156,8 @@ cp -f pango/opentype/README README.opentype
 # remove unpackaged files
 rm -f %{buildroot}%{_libdir}/pango/%{module_version}/modules/*.la
 
+# remove some quite annoying /usr/usr
+perl -pi -e "s|/usr/usr/%{_lib}|%{_libdir}|g" %{buildroot}%{_libdir}/*.la
 
 %post -n %{lib_name}-modules
 if [ "$1" = "2" -a -r  %{_sysconfdir}/pango/pango.modules ]; then

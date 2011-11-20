@@ -37,11 +37,7 @@ Group:		System/Internationalization
 URL:		http://www.pango.org/
 BuildRequires: glib2-devel >= %{req_glib_version} 
 BuildRequires: freetype2-devel >= %{req_freetype2_version}
-%if %mdkversion <= 200600
-BuildRequires: libXft2-devel >= 2.0
-%else
-BuildRequires:libxft-devel >= 2.0
-%endif
+BuildRequires: libxft-devel >= 2.0
 BuildRequires: fontconfig-devel >= %{req_fontconfig_version}
 BuildRequires: libcairo-devel >= %req_cairo_version
 BuildRequires: thai-devel >= 0.1.9
@@ -164,14 +160,6 @@ if [ "$1" = "2" -a -r  %{_sysconfdir}/pango/pango.modules ]; then
   rm -f %{_sysconfdir}/pango/pango.modules 
 fi
 %{_bindir}/%{query_modules} > %{_sysconfdir}/pango/%{_arch}/pango.modules
-
-%if %mdkversion < 200900
-%post -n %{lib_name} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{lib_name} -p /sbin/ldconfig
-%endif
 
 %files
 %doc README AUTHORS

@@ -14,20 +14,20 @@
 
 %define api_version	1.0
 %define module_version	1.6.0
-%define lib_major	0
+%define major		0
 %define gir_major	1.0
 
-%define modulesname	%mklibname %{name}-modules %{api_version}
-%define lib_name	%mklibname %{name} %{api_version} %{lib_major}
-%define caironame	%mklibname %{name}cairo %{api_version} %{lib_major}
-%define ft2name		%mklibname %{name}ft2_ %{api_version} %{lib_major}
-%define xname		%mklibname %{name}x %{api_version} %{lib_major}
-%define xftname		%mklibname %{name}xft %{api_version} %{lib_major}
+%define modules		%mklibname %{name}-modules %{api_version}
+%define lib_name	%mklibname %{name} %{api_version} %{major}
+%define libcairo	%mklibname %{name}cairo %{api_version} %{major}
+%define libft2		%mklibname %{name}ft2_ %{api_version} %{major}
+%define libx		%mklibname %{name}x %{api_version} %{major}
+%define libxft		%mklibname %{name}xft %{api_version} %{major}
 
-%define girname		%mklibname %{name}-gir %{gir_major}
-%define gircairo	%mklibname %{name}cairo-gir %{gir_major}
-%define girft2		%mklibname %{name}ft2-gir %{gir_major}
-%define girxft		%mklibname %{name}xft-gir %{gir_major}
+%define libgir		%mklibname %{name}-gir %{gir_major}
+%define libgircairo	%mklibname %{name}cairo-gir %{gir_major}
+%define libgirft2		%mklibname %{name}ft2-gir %{gir_major}
+%define libgirxft		%mklibname %{name}xft-gir %{gir_major}
 
 %define develname	%mklibname -d %{name} %{api_version} 
 %define develcairo	%mklibname -d %{name}cairo %{api_version} 
@@ -38,7 +38,7 @@
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.29.5
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Internationalization
 URL:		http://www.pango.org/
@@ -65,6 +65,7 @@ A library to handle unicode strings as well as complex bidirectional
 or context dependent shaped strings.
 It is the next step on Gtk+ internationalization.
 
+#--------------------------------------------------------------------
 %package -n %{lib_name} 
 Summary: %{summary}
 Group:	%{group}
@@ -74,71 +75,80 @@ A library to handle unicode strings as well as complex bidirectional
 or context dependent shaped strings.
 It is the next step on Gtk+ internationalization.
 
-%package -n %{caironame} 
+#--------------------------------------------------------------------
+%package -n %{libcairo} 
 Summary: %{summary} - cairo
 Group:	%{group}
 
-%description -n %{caironame}
+%description -n %{libcairo}
 Library for %{name} - cairo.
 
-%package -n %{ft2name} 
+#--------------------------------------------------------------------
+%package -n %{libft2} 
 Summary: %{summary} - ft2
 Group:	%{group}
 
-%description -n %{ft2name}
+%description -n %{libft2}
 Library for %{name} - ft2.
 
-%package -n %{xname} 
+#--------------------------------------------------------------------
+%package -n %{libx} 
 Summary: %{summary} - x
 Group:	%{group}
 
-%description -n %{xname}
+%description -n %{libx}
 Library for %{name} - x
 
-%package -n %{xftname} 
+#--------------------------------------------------------------------
+%package -n %{libxft} 
 Summary: %{summary} - xft
 Group:	%{group}
 
-%description -n %{xftname}
+%description -n %{libxft}
 Library for %{name} - xft
 
-%package -n %{girname}
+#--------------------------------------------------------------------
+%package -n %{libgir}
 Summary:	GObject Introspection interface description for %{name}
 Group:		System/Libraries
 Requires:	%{lib_name} = %{version}-%{release}
 Conflicts:	gir-repository < 0.6.5
 
-%description -n %{girname}
+%description -n %{libgir}
 GObject Introspection interface description for %{name}.
 
-%package -n %{gircairo}
+#--------------------------------------------------------------------
+%package -n %{libgircairo}
 Summary:	GObject Introspection interface description for %{name} - cairo
 Group:		System/Libraries
-Requires:	%{caironame} = %{version}-%{release}
+Requires:	%{libcairo} = %{version}-%{release}
 Conflicts:	gir-repository < 0.6.5
 
-%description -n %{gircairo}
+%description -n %{libgircairo}
 GObject Introspection interface description for %{name} - cairo.
 
-%package -n %{girft2}
+#--------------------------------------------------------------------
+%package -n %{libgirft2}
 Summary:	GObject Introspection interface description for %{name} - ft2
 Group:		System/Libraries
-Requires:	%{ft2name} = %{version}-%{release}
+Requires:	%{libft2} = %{version}-%{release}
 Conflicts:	gir-repository < 0.6.5
 
-%description -n %{girft2}
+%description -n %{libgirft2}
 GObject Introspection interface description for %{name} - ft2.
 
-%package -n %{girxft}
+#--------------------------------------------------------------------
+%package -n %{libgirxft}
 Summary:	GObject Introspection interface description for %{name} - xft
 Group:		System/Libraries
-Requires:	%{ft2name} = %{version}-%{release}
+Requires:	%{libft2} = %{version}-%{release}
 Conflicts:	gir-repository < 0.6.5
 
-%description -n %{girxft}
+%description -n %{libgirxft}
 GObject Introspection interface description for %{name} - xft.
 
-%package -n %{modulesname}
+#--------------------------------------------------------------------
+%package -n %{modules}
 Summary:	%{summary}
 Group:		%{group}
 Provides:	lib%{name}%{api_version} = %{version}-%{release}
@@ -148,16 +158,17 @@ Provides:	lib%{name} = %{version}-%{release}
 Provides:	pango-modules = %{version}-%{release}
 Requires:	%{name} = %{version}-%{release}
 
-%description -n %{modulesname}
+%description -n %{modules}
 A library to handle unicode strings as well as complex bidirectional
 or context dependent shaped strings.
 It is the next step on Gtk+ internationalization.
 
+#--------------------------------------------------------------------
 %package -n %{develname}
 Summary:  %{summary}
 Group: Development/GNOME and GTK+
-%rename	%{name}-devel
-%rename	%{name}-doc
+%rename		%{name}-devel
+%rename		%{name}-doc
 Requires:	%{lib_name} = %{version}-%{release}
 Conflicts:	%{_lib}pango1.0_0 < 1.28.1-2
 
@@ -165,42 +176,47 @@ Conflicts:	%{_lib}pango1.0_0 < 1.28.1-2
 This package includes the development library and header files
 for the %{name} package.
 
+#--------------------------------------------------------------------
 %package -n %{develcairo}
 Summary:  %{summary} - cairo
 Group: Development/GNOME and GTK+
-Requires:	%{caironame} = %{version}-%{release}
+Requires:	%{libcairo} = %{version}-%{release}
 
 %description -n %{develcairo}
 This package includes the development library and header files
 for the %{name}cairo package.
 
+#--------------------------------------------------------------------
 %package -n %{develft2}
 Summary:  %{summary} - ft2
 Group: Development/GNOME and GTK+
-Requires:	%{ft2name} = %{version}-%{release}
+Requires:	%{libft2} = %{version}-%{release}
 
 %description -n %{develft2}
 This package includes the development library and header files
 for the %{name}ft2 package.
 
+#--------------------------------------------------------------------
 %package -n %{develx}
 Summary:  %{summary} - x
 Group: Development/GNOME and GTK+
-Requires:	%{xname} = %{version}-%{release}
+Requires:	%{libx} = %{version}-%{release}
 
 %description -n %{develx}
 This package includes the development library and header files
 for the %{name}x package.
 
+#--------------------------------------------------------------------
 %package -n %{develxft}
 Summary:  %{summary} - xft
 Group: Development/GNOME and GTK+
-Requires:	%{xname} = %{version}-%{release}
+Requires:	%{libx} = %{version}-%{release}
 
 %description -n %{develxft}
 This package includes the development library and header files
 for the %{name}xft package.
 
+#--------------------------------------------------------------------
 %prep
 %setup -q
 %apply_patches
@@ -242,8 +258,14 @@ mv %{buildroot}%{_bindir}/pango-view %{buildroot}%{_bindir}/pango-view%{query_mo
 
 cp -f pango/opentype/README README.opentype
 
-%post -n %{modulesname}
+%post -n %{modules}
 if [ "$1" = "2" -a -r  %{_sysconfdir}/pango/pango.modules ]; then
+  rm -f %{_sysconfdir}/pango/pango.modules 
+fi
+%{_bindir}/%{query_modules} > %{_sysconfdir}/pango/%{_arch}/pango.modules
+
+%postun -n %{modules}
+if [ "$1" -gt "0" -a -r  %{_sysconfdir}/pango/pango.modules ]; then
   rm -f %{_sysconfdir}/pango/pango.modules 
 fi
 %{_bindir}/%{query_modules} > %{_sysconfdir}/pango/%{_arch}/pango.modules
@@ -257,7 +279,7 @@ fi
 %dir %{_sysconfdir}/pango
 %config(noreplace) %{_sysconfdir}/pango/pango*.aliases
 
-%files -n %{modulesname}
+%files -n %{modules}
 %ifarch %{biarches_32} %{biarches_64}
 %{_bindir}/pango-querymodules-*
 %endif
@@ -269,31 +291,31 @@ fi
 %ghost %verify (not md5 mtime size) %config(noreplace) %{_sysconfdir}/pango/%{_arch}/pango.modules
 
 %files -n %{lib_name}
-%{_libdir}/libpango-%{api_version}.so.%{lib_major}*
+%{_libdir}/libpango-%{api_version}.so.%{major}*
 
-%files -n %{caironame}
-%{_libdir}/libpangocairo-%{api_version}.so.%{lib_major}*
+%files -n %{libcairo}
+%{_libdir}/libpangocairo-%{api_version}.so.%{major}*
 
-%files -n %{ft2name}
-%{_libdir}/libpangoft2-%{api_version}.so.%{lib_major}*
+%files -n %{libft2}
+%{_libdir}/libpangoft2-%{api_version}.so.%{major}*
 
-%files -n %{xname}
-%{_libdir}/libpangox-%{api_version}.so.%{lib_major}*
+%files -n %{libx}
+%{_libdir}/libpangox-%{api_version}.so.%{major}*
 
-%files -n %{xftname}
-%{_libdir}/libpangoxft-%{api_version}.so.%{lib_major}*
+%files -n %{libxft}
+%{_libdir}/libpangoxft-%{api_version}.so.%{major}*
 
-%files -n %{girname}
-%_libdir/girepository-1.0/Pango-%{gir_major}.typelib
+%files -n %{libgir}
+%{_libdir}/girepository-1.0/Pango-%{gir_major}.typelib
 
-%files -n %{gircairo}
-%_libdir/girepository-1.0/PangoCairo-%{gir_major}.typelib
+%files -n %{libgircairo}
+%{_libdir}/girepository-1.0/PangoCairo-%{gir_major}.typelib
 
-%files -n %{girft2}
-%_libdir/girepository-1.0/PangoFT2-%{gir_major}.typelib
+%files -n %{libgirft2}
+%{_libdir}/girepository-1.0/PangoFT2-%{gir_major}.typelib
 
-%files -n %{girxft}
-%_libdir/girepository-1.0/PangoXft-%{gir_major}.typelib
+%files -n %{libgirxft}
+%{_libdir}/girepository-1.0/PangoXft-%{gir_major}.typelib
 
 %files -n %{develname}
 %doc %{_datadir}/gtk-doc/html/pango
@@ -301,7 +323,7 @@ fi
 %{_bindir}/pango-view*
 %{_libdir}/libpango-*.so
 %{_libdir}/pkgconfig/pango.pc
-%_datadir/gir-1.0/Pango-%{gir_major}.gir
+%{_datadir}/gir-1.0/Pango-%{gir_major}.gir
 %{_includedir}/pango-1.0/pango/pango-*.h
 %{_includedir}/pango-1.0/pango/pango.h
 %{_includedir}/pango-1.0/pango/pangofc-*.h
@@ -309,13 +331,13 @@ fi
 %files -n %{develcairo}
 %{_libdir}/libpangocairo*.so
 %{_libdir}/pkgconfig/pangocairo.pc
-%_datadir/gir-1.0/PangoCairo-%{gir_major}.gir
+%{_datadir}/gir-1.0/PangoCairo-%{gir_major}.gir
 %{_includedir}/pango-1.0/pango/pangocairo.h
 
 %files -n %{develft2}
 %{_libdir}/libpangoft2-*.so
 %{_libdir}/pkgconfig/pangoft2.pc
-%_datadir/gir-1.0/PangoFT2-%{gir_major}.gir
+%{_datadir}/gir-1.0/PangoFT2-%{gir_major}.gir
 %{_includedir}/pango-1.0/pango/pangoft2.h
 
 %files -n %{develx}
@@ -326,7 +348,6 @@ fi
 %files -n %{develxft}
 %{_libdir}/libpangoxft-*.so
 %{_libdir}/pkgconfig/pangoxft.pc
-%_datadir/gir-1.0/PangoXft-%{gir_major}.gir
+%{_datadir}/gir-1.0/PangoXft-%{gir_major}.gir
 %{_includedir}/pango-1.0/pango/pangoxft.h
 %{_includedir}/pango-1.0/pango/pangoxft-render.h
-

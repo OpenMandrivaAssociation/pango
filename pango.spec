@@ -67,8 +67,8 @@ It is the next step on Gtk+ internationalization.
 
 #--------------------------------------------------------------------
 %package -n %{lib_name} 
-Summary: %{summary}
-Group:	%{group}
+Summary:	%{summary}
+Group:		%{group}
 
 %description -n %{lib_name}
 A library to handle unicode strings as well as complex bidirectional
@@ -77,32 +77,32 @@ It is the next step on Gtk+ internationalization.
 
 #--------------------------------------------------------------------
 %package -n %{libcairo} 
-Summary: %{summary} - cairo
-Group:	%{group}
+Summary:	%{summary} - cairo
+Group:		%{group}
 
 %description -n %{libcairo}
 Library for %{name} - cairo.
 
 #--------------------------------------------------------------------
 %package -n %{libft2} 
-Summary: %{summary} - ft2
-Group:	%{group}
+Summary:	%{summary} - ft2
+Group:		%{group}
 
 %description -n %{libft2}
 Library for %{name} - ft2.
 
 #--------------------------------------------------------------------
 %package -n %{libx} 
-Summary: %{summary} - x
-Group:	%{group}
+Summary:	%{summary} - x
+Group:		%{group}
 
 %description -n %{libx}
 Library for %{name} - x
 
 #--------------------------------------------------------------------
 %package -n %{libxft} 
-Summary: %{summary} - xft
-Group:	%{group}
+Summary:	%{summary} - xft
+Group:		%{group}
 
 %description -n %{libxft}
 Library for %{name} - xft
@@ -153,7 +153,7 @@ Summary:	%{summary}
 Group:		%{group}
 Provides:	lib%{name}%{api_version} = %{version}-%{release}
 Provides:	lib%{name} = %{version}-%{release}
-%rename %{lib_name}-modules
+%rename		%{_lib}pango1.0_0-modules
 #need this since we launch pango-querymodules in %post
 Provides:	pango-modules = %{version}-%{release}
 Requires:	%{name} = %{version}-%{release}
@@ -165,10 +165,10 @@ It is the next step on Gtk+ internationalization.
 
 #--------------------------------------------------------------------
 %package -n %{develname}
-Summary:  %{summary}
-Group: Development/GNOME and GTK+
-%rename		%{name}-devel
-%rename		%{name}-doc
+Summary:	%{summary}
+Group:		Development/GNOME and GTK+
+%rename		pango-devel
+%rename		pango-doc
 Requires:	%{lib_name} = %{version}-%{release}
 Conflicts:	%{_lib}pango1.0_0 < 1.28.1-2
 
@@ -178,8 +178,8 @@ for the %{name} package.
 
 #--------------------------------------------------------------------
 %package -n %{develcairo}
-Summary:  %{summary} - cairo
-Group: Development/GNOME and GTK+
+Summary:	%{summary} - cairo
+Group:		Development/GNOME and GTK+
 Requires:	%{libcairo} = %{version}-%{release}
 
 %description -n %{develcairo}
@@ -188,8 +188,8 @@ for the %{name}cairo package.
 
 #--------------------------------------------------------------------
 %package -n %{develft2}
-Summary:  %{summary} - ft2
-Group: Development/GNOME and GTK+
+Summary:	%{summary} - ft2
+Group:		Development/GNOME and GTK+
 Requires:	%{libft2} = %{version}-%{release}
 
 %description -n %{develft2}
@@ -198,8 +198,8 @@ for the %{name}ft2 package.
 
 #--------------------------------------------------------------------
 %package -n %{develx}
-Summary:  %{summary} - x
-Group: Development/GNOME and GTK+
+Summary:	%{summary} - x
+Group:		Development/GNOME and GTK+
 Requires:	%{libx} = %{version}-%{release}
 
 %description -n %{develx}
@@ -208,8 +208,8 @@ for the %{name}x package.
 
 #--------------------------------------------------------------------
 %package -n %{develxft}
-Summary:  %{summary} - xft
-Group: Development/GNOME and GTK+
+Summary:	%{summary} - xft
+Group:		Development/GNOME and GTK+
 Requires:	%{libx} = %{version}-%{release}
 
 %description -n %{develxft}

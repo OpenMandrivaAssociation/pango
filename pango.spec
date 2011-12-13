@@ -278,6 +278,7 @@ fi
 %config(noreplace) %{_sysconfdir}/pango/pango*.aliases
 %ifnarch %{biarches_32} %{biarches_64}
 %{_bindir}/pango-querymodules
+%else
 %{_bindir}/pango-querymodules-*
 %endif
 %dir %{_libdir}/pango

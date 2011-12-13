@@ -38,7 +38,7 @@
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.29.5
-Release:	3
+Release:	4
 License:	LGPLv2+
 Group:		System/Internationalization
 URL:		http://www.pango.org/
@@ -57,7 +57,7 @@ BuildRequires: pkgconfig(gobject-introspection-1.0)
 BuildRequires: docbook-style-xsl
 BuildRequires: docbook-dtd412-xml
 BuildRequires: gtk-doc >= 0.10
-BuildRequires: libxslt-proc
+BuildRequires: xsltproc
 %endif
 
 %description
@@ -154,9 +154,9 @@ Group:		%{group}
 Provides:	lib%{name}%{api_version} = %{version}-%{release}
 Provides:	lib%{name} = %{version}-%{release}
 %rename		%{_lib}pango1.0_0-modules
+%rename	%{name}
 #need this since we launch pango-querymodules in %post
 Provides:	pango-modules = %{version}-%{release}
-Requires:	%{name} = %{version}-%{release}
 
 %description -n %{modules}
 A library to handle unicode strings as well as complex bidirectional
@@ -270,25 +270,21 @@ if [ "$1" -gt "0" -a -r  %{_sysconfdir}/pango/pango.modules ]; then
 fi
 %{_bindir}/%{query_modules} > %{_sysconfdir}/pango/%{_arch}/pango.modules
 
-%files
+%files -n %{modules}
 %doc README AUTHORS NEWS
+%dir %{_sysconfdir}/pango
+%dir %{_sysconfdir}/pango/%{_arch}
+%ghost %verify (not md5 mtime size) %config(noreplace) %{_sysconfdir}/pango/%{_arch}/pango.modules
+%config(noreplace) %{_sysconfdir}/pango/pango*.aliases
 %ifnarch %{biarches_32} %{biarches_64}
 %{_bindir}/pango-querymodules
-%endif
-%{_mandir}/man1/*
-%dir %{_sysconfdir}/pango
-%config(noreplace) %{_sysconfdir}/pango/pango*.aliases
-
-%files -n %{modules}
-%ifarch %{biarches_32} %{biarches_64}
 %{_bindir}/pango-querymodules-*
 %endif
 %dir %{_libdir}/pango
 %dir %{_libdir}/pango/%{module_version}
 %dir %{_libdir}/pango/%{module_version}/modules
 %{_libdir}/pango/%{module_version}/modules/*.so
-%dir %{_sysconfdir}/pango/%{_arch}
-%ghost %verify (not md5 mtime size) %config(noreplace) %{_sysconfdir}/pango/%{_arch}/pango.modules
+%{_mandir}/man1/*
 
 %files -n %{lib_name}
 %{_libdir}/libpango-%{api_version}.so.%{major}*

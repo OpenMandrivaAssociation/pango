@@ -24,10 +24,10 @@
 %define libx		%mklibname %{name}x %{api} %{major}
 %define libxft		%mklibname %{name}xft %{api} %{major}
 
-%define libgir		%mklibname %{name}-gir %{gir_major}
-%define libgircairo	%mklibname %{name}cairo-gir %{gir_major}
-%define libgirft2	%mklibname %{name}ft2-gir %{gir_major}
-%define libgirxft	%mklibname %{name}xft-gir %{gir_major}
+%define girname		%mklibname %{name}-gir %{gir_major}
+%define gircairo	%mklibname %{name}cairo-gir %{gir_major}
+%define girft2		%mklibname %{name}ft2-gir %{gir_major}
+%define girxft		%mklibname %{name}xft-gir %{gir_major}
 
 %define develname	%mklibname -d %{name} %{api} 
 %define develcairo	%mklibname -d %{name}cairo %{api} 
@@ -38,7 +38,7 @@
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.30.0
-Release:	3
+Release:	4
 License:	LGPLv2+
 Group:		System/Internationalization
 URL:		http://www.pango.org/
@@ -102,32 +102,32 @@ Group:		%{group}
 %description -n %{libxft}
 Library for %{name} - xft
 
-%package -n %{libgir}
+%package -n %{girname}
 Summary:	GObject Introspection interface description for %{name}
 Group:		System/Libraries
 
-%description -n %{libgir}
+%description -n %{girname}
 GObject Introspection interface description for %{name}.
 
-%package -n %{libgircairo}
+%package -n %{gircairo}
 Summary:	GObject Introspection interface description for %{name} - cairo
 Group:		System/Libraries
 
-%description -n %{libgircairo}
+%description -n %{gircairo}
 GObject Introspection interface description for %{name} - cairo.
 
-%package -n %{libgirft2}
+%package -n %{girft2}
 Summary:	GObject Introspection interface description for %{name} - ft2
 Group:		System/Libraries
 
-%description -n %{libgirft2}
+%description -n %{girft2}
 GObject Introspection interface description for %{name} - ft2.
 
-%package -n %{libgirxft}
+%package -n %{girxft}
 Summary:	GObject Introspection interface description for %{name} - xft
 Group:		System/Libraries
 
-%description -n %{libgirxft}
+%description -n %{girxft}
 GObject Introspection interface description for %{name} - xft.
 
 %package -n %{modules}
@@ -151,6 +151,7 @@ Group:		Development/GNOME and GTK+
 %rename		pango-devel
 %rename		pango-doc
 Requires:	%{libname} = %{version}-%{release}
+Requires:	%{girname} = %{version}-%{release}
 Conflicts:	%{_lib}pango1.0_0 < 1.28.1-2
 
 %description -n %{develname}
@@ -161,6 +162,7 @@ for the %{name} package.
 Summary:	%{summary} - cairo
 Group:		Development/GNOME and GTK+
 Requires:	%{libcairo} = %{version}-%{release}
+Requires:	%{gircairo} = %{version}-%{release}
 
 %description -n %{develcairo}
 This package includes the development library and header files
@@ -170,6 +172,7 @@ for the %{name}cairo package.
 Summary:	%{summary} - ft2
 Group:		Development/GNOME and GTK+
 Requires:	%{libft2} = %{version}-%{release}
+Requires:	%{girft2} = %{version}-%{release}
 
 %description -n %{develft2}
 This package includes the development library and header files
@@ -187,7 +190,8 @@ for the %{name}x package.
 %package -n %{develxft}
 Summary:	%{summary} - xft
 Group:		Development/GNOME and GTK+
-Requires:	%{libx} = %{version}-%{release}
+Requires:	%{libxft} = %{version}-%{release}
+Requires:	%{girxft} = %{version}-%{release}
 
 %description -n %{develxft}
 This package includes the development library and header files
@@ -276,16 +280,16 @@ fi
 %files -n %{libxft}
 %{_libdir}/libpangoxft-%{api}.so.%{major}*
 
-%files -n %{libgir}
+%files -n %{girname}
 %{_libdir}/girepository-1.0/Pango-%{gir_major}.typelib
 
-%files -n %{libgircairo}
+%files -n %{gircairo}
 %{_libdir}/girepository-1.0/PangoCairo-%{gir_major}.typelib
 
-%files -n %{libgirft2}
+%files -n %{girft2}
 %{_libdir}/girepository-1.0/PangoFT2-%{gir_major}.typelib
 
-%files -n %{libgirxft}
+%files -n %{girxft}
 %{_libdir}/girepository-1.0/PangoXft-%{gir_major}.typelib
 
 %files -n %{develname}

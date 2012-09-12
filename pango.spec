@@ -299,6 +299,8 @@ fi
 %{_libdir}/libpango-*.so
 %{_libdir}/pkgconfig/pango.pc
 %{_datadir}/gir-1.0/Pango-%{gir_major}.gir
+%dir %{_includedir}/pango-1.0
+%dir %{_includedir}/pango-1.0/pango
 %{_includedir}/pango-1.0/pango/pango-*.h
 %{_includedir}/pango-1.0/pango/pango.h
 %{_includedir}/pango-1.0/pango/pangofc-*.h

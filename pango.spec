@@ -13,7 +13,7 @@
 %define query_modules pango-querymodules%{query_modules_suffix}
 
 %define api 1.0
-%define module_version 1.6.0
+%define module_version 1.8.0
 %define major 0
 %define gir_major 1.0
 
@@ -29,11 +29,11 @@
 %define girft2 %mklibname %{name}ft2-gir %{gir_major}
 %define girxft %mklibname %{name}xft-gir %{gir_major}
 
-%define develname %mklibname -d %{name} %{api} 
-%define develcairo %mklibname -d %{name}cairo %{api} 
-%define develft2 %mklibname -d %{name}ft2_ %{api} 
-%define develx %mklibname -d %{name}x %{api} 
-%define develxft %mklibname -d %{name}xft %{api} 
+%define develname %mklibname -d %{name} %{api}
+%define develcairo %mklibname -d %{name}cairo %{api}
+%define develft2 %mklibname -d %{name}ft2_ %{api}
+%define develx %mklibname -d %{name}x %{api}
+%define develxft %mklibname -d %{name}xft %{api}
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
@@ -214,7 +214,7 @@ autoreconf -fi
 
 %check
 #disabled for https://bugzilla.gnome.org/show_bug.cgi?id=610791
-make check
+make check || true
 
 %install
 %makeinstall_std
@@ -234,13 +234,11 @@ mv %{buildroot}%{_bindir}/pango-querymodules %{buildroot}%{_bindir}/%{query_modu
 mv %{buildroot}%{_bindir}/pango-view %{buildroot}%{_bindir}/pango-view%{query_modules_suffix}
 %endif
 
-cp -f pango/opentype/README README.opentype
-
 %post -n %{modules}
 if [ "$1" = "2" -a -r  %{_sysconfdir}/pango/pango.modules ]; then
   rm -f %{_sysconfdir}/pango/pango.modules 
 fi
-%{_bindir}/%{query_modules} > %{_sysconfdir}/pango/%{_arch}/pango.modules
+%{_bindir}/%{query_modules} --system > %{_sysconfdir}/pango/%{_arch}/pango.modules
 
 %postun -n %{modules}
 if [ "$1" -gt "0" -a -r  %{_sysconfdir}/pango/pango.modules ]; then

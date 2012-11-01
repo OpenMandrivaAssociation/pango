@@ -1,4 +1,4 @@
-%define enable_gtkdoc	1
+%define enable_gtkdoc 1
 
 # Define biarch packages
 %define biarches_32 %{ix86} ppc
@@ -12,28 +12,28 @@
 %endif
 %define query_modules pango-querymodules%{query_modules_suffix}
 
-%define api		1.0
-%define module_version	1.6.0
-%define major		0
-%define gir_major	1.0
+%define api 1.0
+%define module_version 1.6.0
+%define major 0
+%define gir_major 1.0
 
-%define modules		%mklibname %{name}-modules %{api}
-%define libname	%mklibname %{name} %{api} %{major}
-%define libcairo	%mklibname %{name}cairo %{api} %{major}
-%define libft2		%mklibname %{name}ft2_ %{api} %{major}
-%define libx		%mklibname %{name}x %{api} %{major}
-%define libxft		%mklibname %{name}xft %{api} %{major}
+%define modules %mklibname %{name}-modules %{api}
+%define libname %mklibname %{name} %{api} %{major}
+%define libcairo %mklibname %{name}cairo %{api} %{major}
+%define libft2 %mklibname %{name}ft2_ %{api} %{major}
+%define libx %mklibname %{name}x %{api} %{major}
+%define libxft %mklibname %{name}xft %{api} %{major}
 
-%define girname		%mklibname %{name}-gir %{gir_major}
-%define gircairo	%mklibname %{name}cairo-gir %{gir_major}
-%define girft2		%mklibname %{name}ft2-gir %{gir_major}
-%define girxft		%mklibname %{name}xft-gir %{gir_major}
+%define girname %mklibname %{name}-gir %{gir_major}
+%define gircairo %mklibname %{name}cairo-gir %{gir_major}
+%define girft2 %mklibname %{name}ft2-gir %{gir_major}
+%define girxft %mklibname %{name}xft-gir %{gir_major}
 
-%define develname	%mklibname -d %{name} %{api} 
-%define develcairo	%mklibname -d %{name}cairo %{api} 
-%define develft2	%mklibname -d %{name}ft2_ %{api} 
-%define develx		%mklibname -d %{name}x %{api} 
-%define develxft	%mklibname -d %{name}xft %{api} 
+%define develname %mklibname -d %{name} %{api} 
+%define develcairo %mklibname -d %{name}cairo %{api} 
+%define develft2 %mklibname -d %{name}ft2_ %{api} 
+%define develx %mklibname -d %{name}x %{api} 
+%define develxft %mklibname -d %{name}xft %{api} 
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
@@ -46,18 +46,18 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{name}-%{version}.tar.xz
 # (gb) 1.4.0-2mdk biarch support
 Patch5:		pango-1.29.5-lib64.patch
 
-BuildRequires: pkgconfig(cairo) >= 1.7.6
-BuildRequires: pkgconfig(fontconfig) >= 2.5.0
-BuildRequires: pkgconfig(freetype2) >= 2.1.3
-BuildRequires: pkgconfig(glib-2.0) >= 2.24
-BuildRequires: pkgconfig(gobject-introspection-1.0)
-BuildRequires: pkgconfig(libthai) >= 0.1.9
-BuildRequires: pkgconfig(xft) >= 2.0
+BuildRequires:	pkgconfig(cairo) >= 1.7.6
+BuildRequires:	pkgconfig(fontconfig) >= 2.5.0
+BuildRequires:	pkgconfig(freetype2) >= 2.1.3
+BuildRequires:	pkgconfig(glib-2.0) >= 2.24
+BuildRequires:	pkgconfig(gobject-introspection-1.0)
+BuildRequires:	pkgconfig(libthai) >= 0.1.9
+BuildRequires:	pkgconfig(xft) >= 2.0
 %if %{enable_gtkdoc}
-BuildRequires: docbook-style-xsl
-BuildRequires: docbook-dtd412-xml
-BuildRequires: gtk-doc >= 0.10
-BuildRequires: xsltproc
+BuildRequires:	docbook-style-xsl
+BuildRequires:	docbook-dtd412-xml
+BuildRequires:	gtk-doc >= 0.10
+BuildRequires:	xsltproc
 %endif
 
 %description
@@ -65,7 +65,7 @@ A library to handle unicode strings as well as complex bidirectional
 or context dependent shaped strings.
 It is the next step on Gtk+ internationalization.
 
-%package -n %{libname} 
+%package -n %{libname}
 Summary:	%{summary}
 Group:		%{group}
 
@@ -74,33 +74,33 @@ A library to handle unicode strings as well as complex bidirectional
 or context dependent shaped strings.
 It is the next step on Gtk+ internationalization.
 
-%package -n %{libcairo} 
+%package -n %{libcairo}
 Summary:	%{summary} - cairo
 Group:		%{group}
 
 %description -n %{libcairo}
 Library for %{name} - cairo.
 
-%package -n %{libft2} 
+%package -n %{libft2}
 Summary:	%{summary} - ft2
 Group:		%{group}
 
 %description -n %{libft2}
 Library for %{name} - ft2.
 
-%package -n %{libx} 
+%package -n %{libx}
 Summary:	%{summary} - x
 Group:		%{group}
 
 %description -n %{libx}
-Library for %{name} - x
+Library for %{name} - x.
 
-%package -n %{libxft} 
+%package -n %{libxft}
 Summary:	%{summary} - xft
 Group:		%{group}
 
 %description -n %{libxft}
-Library for %{name} - xft
+Library for %{name} - xft.
 
 %package -n %{girname}
 Summary:	GObject Introspection interface description for %{name}
@@ -136,7 +136,7 @@ Group:		%{group}
 Provides:	lib%{name}%{api} = %{version}-%{release}
 Provides:	lib%{name} = %{version}-%{release}
 %rename		%{_lib}pango1.0_0-modules
-%rename	%{name}
+%rename		%{name}
 #need this since we launch pango-querymodules in %post
 Provides:	pango-modules = %{version}-%{release}
 

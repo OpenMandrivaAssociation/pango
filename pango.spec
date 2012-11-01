@@ -44,7 +44,7 @@ Group:		System/Internationalization
 URL:		http://www.pango.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{name}-%{version}.tar.xz
 # (gb) 1.4.0-2mdk biarch support
-Patch5:		pango-1.29.5-lib64.patch
+Patch5:		pango-1.32.0-lib64.patch
 
 BuildRequires:	pkgconfig(cairo) >= 1.7.6
 BuildRequires:	pkgconfig(fontconfig) >= 2.5.0

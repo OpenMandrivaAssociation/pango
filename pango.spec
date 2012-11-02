@@ -21,7 +21,6 @@
 %define libname %mklibname %{name} %{api} %{major}
 %define libcairo %mklibname %{name}cairo %{api} %{major}
 %define libft2 %mklibname %{name}ft2_ %{api} %{major}
-%define libx %mklibname %{name}x %{api} %{major}
 %define libxft %mklibname %{name}xft %{api} %{major}
 
 %define girname %mklibname %{name}-gir %{gir_major}
@@ -88,13 +87,6 @@ Group:		%{group}
 
 %description -n %{libft2}
 Library for %{name} - ft2.
-
-%package -n %{libx}
-Summary:	%{summary} - x
-Group:		%{group}
-
-%description -n %{libx}
-Library for %{name} - x.
 
 %package -n %{libxft}
 Summary:	%{summary} - xft
@@ -178,15 +170,6 @@ Requires:	%{girft2} = %{version}-%{release}
 %description -n %{develft2}
 This package includes the development library and header files
 for the %{name}ft2 package.
-
-%package -n %{develx}
-Summary:	%{summary} - x
-Group:		Development/GNOME and GTK+
-Requires:	%{libx} = %{version}-%{release}
-
-%description -n %{develx}
-This package includes the development library and header files
-for the %{name}x package.
 
 %package -n %{develxft}
 Summary:	%{summary} - xft
@@ -312,11 +295,6 @@ fi
 %{_libdir}/pkgconfig/pangoft2.pc
 %{_datadir}/gir-1.0/PangoFT2-%{gir_major}.gir
 %{_includedir}/pango-1.0/pango/pangoft2.h
-
-%files -n %{develx}
-%{_libdir}/libpangox-*.so
-%{_libdir}/pkgconfig/pangox.pc
-%{_includedir}/pango-1.0/pango/pangox.h
 
 %files -n %{develxft}
 %{_libdir}/libpangoxft-*.so

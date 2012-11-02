@@ -273,9 +273,6 @@ fi
 %files -n %{libft2}
 %{_libdir}/libpangoft2-%{api}.so.%{major}*
 
-%files -n %{libx}
-%{_libdir}/libpangox-%{api}.so.%{major}*
-
 %files -n %{libxft}
 %{_libdir}/libpangoxft-%{api}.so.%{major}*
 

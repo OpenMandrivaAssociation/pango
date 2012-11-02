@@ -235,7 +235,6 @@ fi
 %dir %{_sysconfdir}/pango
 %dir %{_sysconfdir}/pango/%{_arch}
 %ghost %verify (not md5 mtime size) %config(noreplace) %{_sysconfdir}/pango/%{_arch}/pango.modules
-%config(noreplace) %{_sysconfdir}/pango/pango*.aliases
 %ifnarch %{biarches_32} %{biarches_64}
 %{_bindir}/pango-querymodules
 %else

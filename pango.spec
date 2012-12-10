@@ -1,3 +1,4 @@
+%define url_ver %(echo %{version}|cut -d. -f1,2)
 %define enable_gtkdoc 1
 
 # Define biarch packages
@@ -35,12 +36,12 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.32.2
+Version:	1.32.4
 Release:	1
 License:	LGPLv2+
 Group:		System/Internationalization
 URL:		http://www.pango.org/
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/1.32/%{name}-%{version}.tar.xz
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{url_ver}/%{name}-%{version}.tar.xz
 # (gb) 1.4.0-2mdk biarch support
 Patch5:		pango-1.32.0-lib64.patch
 

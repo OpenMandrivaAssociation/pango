@@ -52,7 +52,7 @@ BuildRequires:	pkgconfig(glib-2.0) >= 2.24
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libthai) >= 0.1.9
 BuildRequires:	pkgconfig(xft) >= 2.0
-#BuildRequires:	pkgconfig(harfbuzz) >= 0.9.3-3
+BuildRequires:	pkgconfig(harfbuzz) >= 0.9.3-3
 BuildRequires:	harfbuzz-devel
 %if %{enable_gtkdoc}
 BuildRequires:	docbook-style-xsl

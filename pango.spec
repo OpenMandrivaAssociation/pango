@@ -191,6 +191,7 @@ for the %{name}xft package.
 autoreconf -fi
 %configure2_5x \
 	--enable-static=no \
+    --with-included-modules=basic-fc \
 %if !%enable_gtkdoc
 	--disable-gtk-doc \
 %endif

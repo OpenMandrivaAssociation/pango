@@ -33,6 +33,7 @@
 %define develft2 %mklibname -d %{name}ft2_ %{api}
 %define develx %mklibname -d %{name}x %{api}
 %define develxft %mklibname -d %{name}xft %{api}
+%bcond_with	bootstrap
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
@@ -96,6 +97,7 @@ Group:		%{group}
 %description -n %{libxft}
 Library for %{name} - xft.
 
+%if !%{with bootstrap}
 %package -n %{girname}
 Summary:	GObject Introspection interface description for %{name}
 Group:		System/Libraries
@@ -123,6 +125,7 @@ Group:		System/Libraries
 
 %description -n %{girxft}
 GObject Introspection interface description for %{name} - xft.
+%endif
 
 %package -n %{modules}
 Summary:	Internationalized text layout and rendering system
@@ -145,7 +148,9 @@ Group:		Development/GNOME and GTK+
 %rename		pango-devel
 %rename		pango-doc
 Requires:	%{libname} = %{version}-%{release}
+%if !%{with bootstrap}
 Requires:	%{girname} = %{version}-%{release}
+%endif
 Conflicts:	%{_lib}pango1.0_0 < 1.28.1-2
 
 %description -n %{develname}
@@ -156,7 +161,9 @@ for the %{name} package.
 Summary:	Internationalized text layout and rendering system - cairo
 Group:		Development/GNOME and GTK+
 Requires:	%{libcairo} = %{version}-%{release}
+%if !%{with bootstrap}
 Requires:	%{gircairo} = %{version}-%{release}
+%endif
 
 %description -n %{develcairo}
 This package includes the development library and header files
@@ -166,7 +173,9 @@ for the %{name}cairo package.
 Summary:	Internationalized text layout and rendering system - ft2
 Group:		Development/GNOME and GTK+
 Requires:	%{libft2} = %{version}-%{release}
+%if !%{with bootstrap}
 Requires:	%{girft2} = %{version}-%{release}
+%endif
 
 %description -n %{develft2}
 This package includes the development library and header files
@@ -176,7 +185,9 @@ for the %{name}ft2 package.
 Summary:	Internationalized text layout and rendering system - xft
 Group:		Development/GNOME and GTK+
 Requires:	%{libxft} = %{version}-%{release}
+%if !%{with bootstrap}
 Requires:	%{girxft} = %{version}-%{release}
+%endif
 
 %description -n %{develxft}
 This package includes the development library and header files
@@ -191,7 +202,10 @@ for the %{name}xft package.
 autoreconf -fi
 %configure2_5x \
 	--enable-static=no \
-    --with-included-modules=basic-fc \
+	--with-included-modules=basic-fc \
+%if %{with bootstrap}
+        --enable-introspection=no \
+%endif
 %if !%enable_gtkdoc
 	--disable-gtk-doc \
 %endif
@@ -260,6 +274,7 @@ fi
 %files -n %{libxft}
 %{_libdir}/libpangoxft-%{api}.so.%{major}*
 
+%if !%{with bootstrap}
 %files -n %{girname}
 %{_libdir}/girepository-1.0/Pango-%{api}.typelib
 
@@ -271,6 +286,7 @@ fi
 
 %files -n %{girxft}
 %{_libdir}/girepository-1.0/PangoXft-%{api}.typelib
+%endif
 
 %files -n %{develname}
 %doc %{_datadir}/gtk-doc/html/pango
@@ -278,7 +294,9 @@ fi
 %{_bindir}/pango-view*
 %{_libdir}/libpango-*.so
 %{_libdir}/pkgconfig/pango.pc
+%if !%{with bootstrap}
 %{_datadir}/gir-1.0/Pango-%{api}.gir
+%endif
 %dir %{_includedir}/pango-1.0
 %dir %{_includedir}/pango-1.0/pango
 %{_includedir}/pango-1.0/pango/pango-*.h
@@ -288,19 +306,25 @@ fi
 %files -n %{develcairo}
 %{_libdir}/libpangocairo*.so
 %{_libdir}/pkgconfig/pangocairo.pc
+%if !%{with bootstrap}
 %{_datadir}/gir-1.0/PangoCairo-%{api}.gir
+%endif
 %{_includedir}/pango-1.0/pango/pangocairo.h
 
 %files -n %{develft2}
 %{_libdir}/libpangoft2-*.so
 %{_libdir}/pkgconfig/pangoft2.pc
+%if !%{with bootstrap}
 %{_datadir}/gir-1.0/PangoFT2-%{api}.gir
+%endif
 %{_includedir}/pango-1.0/pango/pangoft2.h
 
 %files -n %{develxft}
 %{_libdir}/libpangoxft-*.so
 %{_libdir}/pkgconfig/pangoxft.pc
+%if !%{with bootstrap}
 %{_datadir}/gir-1.0/PangoXft-%{api}.gir
+%endif
 %{_includedir}/pango-1.0/pango/pangoxft.h
 %{_includedir}/pango-1.0/pango/pangoxft-render.h
 

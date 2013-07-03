@@ -13,8 +13,8 @@
 %endif
 %define query_modules pango-querymodules%{query_modules_suffix}
 
-%define api 1.0
 %define module_version 1.8.0
+%define api 1.0
 %define major 0
 
 %define modules %mklibname %{name}-modules %{api}
@@ -28,11 +28,11 @@
 %define girft2 %mklibname %{name}ft2-gir %{api}
 %define girxft %mklibname %{name}xft-gir %{api}
 
-%define develname %mklibname -d %{name} %{api}
-%define develcairo %mklibname -d %{name}cairo %{api}
-%define develft2 %mklibname -d %{name}ft2_ %{api}
-%define develx %mklibname -d %{name}x %{api}
-%define develxft %mklibname -d %{name}xft %{api}
+%define devname %mklibname -d %{name} %{api}
+%define devcairo %mklibname -d %{name}cairo %{api}
+%define devft2 %mklibname -d %{name}ft2_ %{api}
+%define devx %mklibname -d %{name}x %{api}
+%define devxft %mklibname -d %{name}xft %{api}
 %bcond_with	bootstrap
 
 Summary:	System for layout and rendering of internationalized text
@@ -41,7 +41,7 @@ Version:	1.34.1
 Release:	1
 License:	LGPLv2+
 Group:		System/Internationalization
-URL:		http://www.pango.org/
+Url:		http://www.pango.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{url_ver}/%{name}-%{version}.tar.xz
 # (gb) 1.4.0-2mdk biarch support
 Patch5:		pango-1.32.0-lib64.patch
@@ -52,9 +52,8 @@ BuildRequires:	pkgconfig(freetype2) >= 2.1.3
 BuildRequires:	pkgconfig(glib-2.0) >= 2.24
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libthai) >= 0.1.9
-BuildRequires:	pkgconfig(xft) >= 2.0
 BuildRequires:	pkgconfig(harfbuzz) >= 0.9.3-3
-BuildRequires:	harfbuzz-devel
+BuildRequires:	pkgconfig(xft) >= 2.0
 %if %{enable_gtkdoc}
 BuildRequires:	docbook-style-xsl
 BuildRequires:	docbook-dtd412-xml
@@ -142,7 +141,7 @@ A library to handle unicode strings as well as complex bidirectional
 or context dependent shaped strings.
 It is the next step on Gtk+ internationalization.
 
-%package -n %{develname}
+%package -n %{devname}
 Summary:	Internationalized text layout and rendering system
 Group:		Development/GNOME and GTK+
 %rename		pango-devel
@@ -153,11 +152,11 @@ Requires:	%{girname} = %{version}-%{release}
 %endif
 Conflicts:	%{_lib}pango1.0_0 < 1.28.1-2
 
-%description -n %{develname}
+%description -n %{devname}
 This package includes the development library and header files
 for the %{name} package.
 
-%package -n %{develcairo}
+%package -n %{devcairo}
 Summary:	Internationalized text layout and rendering system - cairo
 Group:		Development/GNOME and GTK+
 Requires:	%{libcairo} = %{version}-%{release}
@@ -165,11 +164,11 @@ Requires:	%{libcairo} = %{version}-%{release}
 Requires:	%{gircairo} = %{version}-%{release}
 %endif
 
-%description -n %{develcairo}
+%description -n %{devcairo}
 This package includes the development library and header files
 for the %{name}cairo package.
 
-%package -n %{develft2}
+%package -n %{devft2}
 Summary:	Internationalized text layout and rendering system - ft2
 Group:		Development/GNOME and GTK+
 Requires:	%{libft2} = %{version}-%{release}
@@ -177,11 +176,11 @@ Requires:	%{libft2} = %{version}-%{release}
 Requires:	%{girft2} = %{version}-%{release}
 %endif
 
-%description -n %{develft2}
+%description -n %{devft2}
 This package includes the development library and header files
 for the %{name}ft2 package.
 
-%package -n %{develxft}
+%package -n %{devxft}
 Summary:	Internationalized text layout and rendering system - xft
 Group:		Development/GNOME and GTK+
 Requires:	%{libxft} = %{version}-%{release}
@@ -189,7 +188,7 @@ Requires:	%{libxft} = %{version}-%{release}
 Requires:	%{girxft} = %{version}-%{release}
 %endif
 
-%description -n %{develxft}
+%description -n %{devxft}
 This package includes the development library and header files
 for the %{name}xft package.
 
@@ -288,7 +287,7 @@ fi
 %{_libdir}/girepository-1.0/PangoXft-%{api}.typelib
 %endif
 
-%files -n %{develname}
+%files -n %{devname}
 %doc %{_datadir}/gtk-doc/html/pango
 %doc ChangeLog pango-view/HELLO.txt
 %{_bindir}/pango-view*
@@ -303,7 +302,7 @@ fi
 %{_includedir}/pango-1.0/pango/pango.h
 %{_includedir}/pango-1.0/pango/pangofc-*.h
 
-%files -n %{develcairo}
+%files -n %{devcairo}
 %{_libdir}/libpangocairo*.so
 %{_libdir}/pkgconfig/pangocairo.pc
 %if !%{with bootstrap}
@@ -311,7 +310,7 @@ fi
 %endif
 %{_includedir}/pango-1.0/pango/pangocairo.h
 
-%files -n %{develft2}
+%files -n %{devft2}
 %{_libdir}/libpangoft2-*.so
 %{_libdir}/pkgconfig/pangoft2.pc
 %if !%{with bootstrap}
@@ -319,7 +318,7 @@ fi
 %endif
 %{_includedir}/pango-1.0/pango/pangoft2.h
 
-%files -n %{develxft}
+%files -n %{devxft}
 %{_libdir}/libpangoxft-*.so
 %{_libdir}/pkgconfig/pangoxft.pc
 %if !%{with bootstrap}

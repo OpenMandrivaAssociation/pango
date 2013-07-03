@@ -38,7 +38,7 @@
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.34.1
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Internationalization
 Url:		http://www.pango.org/
@@ -217,11 +217,6 @@ make check || true
 
 %install
 %makeinstall_std
-# remove unpackaged files
-find %{buildroot} -name "*.la" -delete
-
-# remove some quite annoying /usr/usr
-perl -pi -e "s|/usr/usr/%{_lib}|%{_libdir}|g" %{buildroot}%{_libdir}/*.la
 
 mkdir -p %{buildroot}%{_sysconfdir}/pango/%{_arch}
 touch %{buildroot}%{_sysconfdir}/pango/%{_arch}/pango.modules

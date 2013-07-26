@@ -38,7 +38,7 @@
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.34.1
-Release:	3
+Release:	4
 License:	LGPLv2+
 Group:		System/Internationalization
 Url:		http://www.pango.org/
@@ -78,7 +78,7 @@ It is the next step on Gtk+ internationalization.
 %package -n %{libcairo}
 Summary:	Internationalized text layout and rendering system - cairo
 Group:		%{group}
-Requires:	mesa
+
 
 %description -n %{libcairo}
 Library for %{name} - cairo.

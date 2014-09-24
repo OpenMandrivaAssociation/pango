@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   pango-1.36.7.tar.xz: 8cdb1b45bbbec373256695e019f07cd6716980b8
+sources:
+  pango-1.36.8.tar.xz: c6ba02ee8f9d8b22b7cfd74c4b6ae170bebc8d2b

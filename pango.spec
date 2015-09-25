@@ -11,7 +11,6 @@
 %ifarch %{biarches_64}
 %define query_modules_suffix -64
 %endif
-%define query_modules pango-querymodules%{query_modules_suffix}
 
 %define module_version 1.8.0
 %define api 1.0
@@ -37,14 +36,12 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.36.8
-Release:	4
+Version:	1.38.0
+Release:	1
 License:	LGPLv2+
 Group:		System/Internationalization
 Url:		http://www.pango.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{url_ver}/%{name}-%{version}.tar.xz
-# (gb) 1.4.0-2mdk biarch support
-Patch5:		pango-1.32.0-lib64.patch
 
 BuildRequires:	pkgconfig(cairo) >= 1.7.6
 BuildRequires:	pkgconfig(fontconfig) >= 2.5.0
@@ -198,8 +195,6 @@ for the %{name}xft package.
 %apply_patches
 
 %build
-#needed by patch5
-autoreconf -fi
 %configure2_5x \
 	--enable-static=no \
 	--with-included-modules=basic-fc \
@@ -222,9 +217,6 @@ make check || true
 mkdir -p %{buildroot}%{_sysconfdir}/pango/%{_arch}
 touch %{buildroot}%{_sysconfdir}/pango/%{_arch}/pango.modules
 
-%ifarch %{biarches_32} %{biarches_64}
-mv %{buildroot}%{_bindir}/pango-querymodules %{buildroot}%{_bindir}/%{query_modules}
-%endif
 %ifarch %{biarches_64}
 mv %{buildroot}%{_bindir}/pango-view %{buildroot}%{_bindir}/pango-view%{query_modules_suffix}
 %endif
@@ -246,15 +238,6 @@ fi
 %dir %{_sysconfdir}/pango
 %dir %{_sysconfdir}/pango/%{_arch}
 %ghost %verify (not md5 mtime size) %config(noreplace) %{_sysconfdir}/pango/%{_arch}/pango.modules
-%ifnarch %{biarches_32} %{biarches_64}
-%{_bindir}/pango-querymodules
-%else
-%{_bindir}/pango-querymodules-*
-%endif
-%dir %{_libdir}/pango
-%dir %{_libdir}/pango/%{module_version}
-%dir %{_libdir}/pango/%{module_version}/modules
-%{_libdir}/pango/%{module_version}/modules/*.so
 %{_mandir}/man1/*
 
 %files -n %{libname}

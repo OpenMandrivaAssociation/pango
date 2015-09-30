@@ -37,7 +37,7 @@
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.38.0
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Internationalization
 Url:		http://www.pango.org/
@@ -223,15 +223,15 @@ mv %{buildroot}%{_bindir}/pango-view %{buildroot}%{_bindir}/pango-view%{query_mo
 
 %post -n %{modules}
 if [ "$1" = "2" -a -r  %{_sysconfdir}/pango/pango.modules ]; then
-  rm -f %{_sysconfdir}/pango/pango.modules 
+  rm -f %{_sysconfdir}/pango/pango.modules
 fi
-%{_bindir}/%{query_modules} --system > %{_sysconfdir}/pango/%{_arch}/pango.modules
+%{_bindir}/pango-querymodules --system > %{_sysconfdir}/pango/%{_arch}/pango.modules
 
 %postun -n %{modules}
 if [ "$1" -gt "0" -a -r  %{_sysconfdir}/pango/pango.modules ]; then
   rm -f %{_sysconfdir}/pango/pango.modules 
 fi
-%{_bindir}/%{query_modules} > %{_sysconfdir}/pango/%{_arch}/pango.modules
+%{_bindir}/pango-querymodules > %{_sysconfdir}/pango/%{_arch}/pango.modules
 
 %files -n %{modules}
 %doc README AUTHORS NEWS

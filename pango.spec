@@ -1,22 +1,9 @@
 %define url_ver %(echo %{version}|cut -d. -f1,2)
 %define enable_gtkdoc 1
 
-# Define biarch packages
-%define biarches_32 %{ix86} ppc
-%define biarches_64 x86_64 ppc64
-%define query_modules_suffix %{nil}
-%ifarch %{biarches_32}
-%define query_modules_suffix -32
-%endif
-%ifarch %{biarches_64}
-%define query_modules_suffix -64
-%endif
-
-%define module_version 1.8.0
 %define api 1.0
 %define major 0
 
-%define modules %mklibname %{name}-modules %{api}
 %define libname %mklibname %{name} %{api} %{major}
 %define libcairo %mklibname %{name}cairo %{api} %{major}
 %define libft2 %mklibname %{name}ft2_ %{api} %{major}
@@ -37,12 +24,11 @@
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.38.0
-Release:	2
+Release:	3
 License:	LGPLv2+
 Group:		System/Internationalization
 Url:		http://www.pango.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{url_ver}/%{name}-%{version}.tar.xz
-
 BuildRequires:	pkgconfig(cairo) >= 1.7.6
 BuildRequires:	pkgconfig(fontconfig) >= 2.5.0
 BuildRequires:	pkgconfig(freetype2) >= 2.1.3
@@ -57,6 +43,13 @@ BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gtk-doc >= 0.10
 BuildRequires:	xsltproc
 %endif
+Requires:	%{libname} = %{EVRD}
+# (tpg) get rid of pango-modules
+Obsoletes:	%{mklibname pango-modules 1.0} < 1.38.0-3
+Provides:	pango-modules = %{EVRD}
+Provides:	lib%{name}%{api} = %{EVRD}
+Provides:	lib%{name} = %{EVRD}
+%rename		%{_lib}pango1.0_0-modules
 
 %description
 A library to handle unicode strings as well as complex bidirectional
@@ -75,7 +68,6 @@ It is the next step on Gtk+ internationalization.
 %package -n %{libcairo}
 Summary:	Internationalized text layout and rendering system - cairo
 Group:		%{group}
-
 
 %description -n %{libcairo}
 Library for %{name} - cairo.
@@ -124,29 +116,14 @@ Group:		System/Libraries
 GObject Introspection interface description for %{name} - xft.
 %endif
 
-%package -n %{modules}
-Summary:	Internationalized text layout and rendering system
-Group:		%{group}
-Provides:	lib%{name}%{api} = %{version}-%{release}
-Provides:	lib%{name} = %{version}-%{release}
-%rename		%{_lib}pango1.0_0-modules
-%rename		%{name}
-#need this since we launch pango-querymodules in %post
-Provides:	pango-modules = %{version}-%{release}
-
-%description -n %{modules}
-A library to handle unicode strings as well as complex bidirectional
-or context dependent shaped strings.
-It is the next step on Gtk+ internationalization.
-
 %package -n %{devname}
 Summary:	Internationalized text layout and rendering system
 Group:		Development/GNOME and GTK+
 %rename		pango-devel
 %rename		pango-doc
-Requires:	%{libname} = %{version}-%{release}
+Requires:	%{libname} = %{EVRD}
 %if !%{with bootstrap}
-Requires:	%{girname} = %{version}-%{release}
+Requires:	%{girname} = %{EVRD}
 %endif
 Conflicts:	%{_lib}pango1.0_0 < 1.28.1-2
 
@@ -195,17 +172,17 @@ for the %{name}xft package.
 %apply_patches
 
 %build
-%configure2_5x \
+%configure \
 	--enable-static=no \
 	--with-included-modules=basic-fc \
 %if %{with bootstrap}
-        --enable-introspection=no \
+	--enable-introspection=no \
 %endif
 %if !%enable_gtkdoc
 	--disable-gtk-doc \
 %endif
 
-%make ARCH=%{_arch}
+%make
 
 %check
 #disabled for https://bugzilla.gnome.org/show_bug.cgi?id=610791
@@ -214,30 +191,9 @@ make check || true
 %install
 %makeinstall_std
 
-mkdir -p %{buildroot}%{_sysconfdir}/pango/%{_arch}
-touch %{buildroot}%{_sysconfdir}/pango/%{_arch}/pango.modules
-
-%ifarch %{biarches_64}
-mv %{buildroot}%{_bindir}/pango-view %{buildroot}%{_bindir}/pango-view%{query_modules_suffix}
-%endif
-
-%post -n %{modules}
-if [ "$1" = "2" -a -r  %{_sysconfdir}/pango/pango.modules ]; then
-  rm -f %{_sysconfdir}/pango/pango.modules
-fi
-%{_bindir}/pango-querymodules --system > %{_sysconfdir}/pango/%{_arch}/pango.modules
-
-%postun -n %{modules}
-if [ "$1" -gt "0" -a -r  %{_sysconfdir}/pango/pango.modules ]; then
-  rm -f %{_sysconfdir}/pango/pango.modules 
-fi
-%{_bindir}/pango-querymodules > %{_sysconfdir}/pango/%{_arch}/pango.modules
-
-%files -n %{modules}
+%files
 %doc README AUTHORS NEWS
-%dir %{_sysconfdir}/pango
-%dir %{_sysconfdir}/pango/%{_arch}
-%ghost %verify (not md5 mtime size) %config(noreplace) %{_sysconfdir}/pango/%{_arch}/pango.modules
+%{_bindir}/pango-view
 %{_mandir}/man1/*
 
 %files -n %{libname}
@@ -269,7 +225,6 @@ fi
 %files -n %{devname}
 %doc %{_datadir}/gtk-doc/html/pango
 %doc ChangeLog pango-view/HELLO.txt
-%{_bindir}/pango-view*
 %{_libdir}/libpango-*.so
 %{_libdir}/pkgconfig/pango.pc
 %if !%{with bootstrap}
@@ -305,4 +260,3 @@ fi
 %endif
 %{_includedir}/pango-1.0/pango/pangoxft.h
 %{_includedir}/pango-1.0/pango/pangoxft-render.h
-

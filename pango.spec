@@ -23,7 +23,7 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.40.1
+Version:	1.40.3
 Release:	1
 License:	LGPLv2+
 Group:		System/Internationalization
@@ -224,7 +224,6 @@ make check || true
 
 %files -n %{devname}
 %doc %{_datadir}/gtk-doc/html/pango
-%doc ChangeLog pango-view/HELLO.txt
 %{_libdir}/libpango-*.so
 %{_libdir}/pkgconfig/pango.pc
 %if !%{with bootstrap}

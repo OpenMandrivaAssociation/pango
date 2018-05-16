@@ -37,6 +37,7 @@ BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libthai) >= 0.1.9
 BuildRequires:	pkgconfig(harfbuzz) >= 0.9.3-3
 BuildRequires:	pkgconfig(xft) >= 2.0
+BuildRequires:	pkgconfig(fribidi) >= 0.19.7
 %if %{enable_gtkdoc}
 BuildRequires:	docbook-style-xsl
 BuildRequires:	docbook-dtd412-xml

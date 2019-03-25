@@ -172,6 +172,7 @@ for the %{name}xft package.
 %prep
 %setup -q
 %apply_patches
+cp -f %{_bindir}/libtool libtool
 
 %build
 %configure \

@@ -23,8 +23,8 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.42.1
-Release:	2
+Version:	1.42.4
+Release:	1
 License:	LGPLv2+
 Group:		System/Internationalization
 Url:		http://www.pango.org/
@@ -197,6 +197,7 @@ make check || true
 %files
 %doc README AUTHORS NEWS
 %{_bindir}/pango-view
+%{_bindir}/pango-list
 %{_mandir}/man1/*
 
 %files -n %{libname}

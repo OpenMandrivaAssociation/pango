@@ -197,6 +197,7 @@ make check || true
 %files
 %doc README AUTHORS NEWS
 %{_bindir}/pango-view
+%{_bindir}/pango-list
 %{_mandir}/man1/*
 
 %files -n %{libname}

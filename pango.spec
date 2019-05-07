@@ -24,11 +24,12 @@
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.42.4
-Release:	2
+Release:	3
 License:	LGPLv2+
 Group:		System/Internationalization
 Url:		http://www.pango.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{url_ver}/%{name}-%{version}.tar.xz
+BuildRequires:	meson
 BuildRequires:	pkgconfig(cairo) >= 1.7.6
 BuildRequires:	pkgconfig(fontconfig) >= 2.5.0
 BuildRequires:	pkgconfig(freetype2) >= 2.1.3
@@ -178,29 +179,32 @@ This package includes the development library and header files
 for the %{name}xft package.
 
 %prep
-%setup -q
-%apply_patches
-cp -f %{_bindir}/libtool libtool
+%autosetup -p1
 
 %build
-%configure \
-	--enable-static=no \
-	--with-included-modules=basic-fc \
+%meson \
+	-Db_ndebug=true \
+	-Dc_std=c11 \
 %if %{with bootstrap}
-	--enable-introspection=no \
+	-Dgir=false \
+%else
+	-Dgir=true \
 %endif
-%if !%enable_gtkdoc
-	--disable-gtk-doc \
+%if %enable_gtkdoc
+	-Denable_docs=true \
+%else
+	-Denable_docs=false \
 %endif
 
-%make
-
-%check
-#disabled for https://bugzilla.gnome.org/show_bug.cgi?id=610791
-make check || true
+%ninja_build -C build
 
 %install
-%makeinstall_std
+%ninja_install -C build
+
+# No need to package the tests, they aren't relevant
+# for end users
+rm -rf %{buildroot}%{_libexecdir}/installed-tests \
+	%{buildroot}%{_datadir}/installed-tests
 
 %files
 %doc README AUTHORS NEWS

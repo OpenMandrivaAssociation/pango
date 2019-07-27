@@ -231,7 +231,7 @@ rm -rf %{buildroot}%{_libexecdir}/installed-tests \
 %endif
 
 %files -n %{devname}
-%doc %{_datadir}/gtk-doc/html/pango
+#doc %{_datadir}/gtk-doc/html/pango
 %{_libdir}/libpango-*.so
 %{_libdir}/pkgconfig/pango.pc
 %if !%{with bootstrap}

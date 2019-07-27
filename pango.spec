@@ -199,7 +199,7 @@ rm -rf %{buildroot}%{_libexecdir}/installed-tests \
 	%{buildroot}%{_datadir}/installed-tests
 
 %files
-%doc README AUTHORS NEWS
+%doc README.md THANKS NEWS
 %{_bindir}/pango-view
 %{_bindir}/pango-list
 %{_mandir}/man1/*

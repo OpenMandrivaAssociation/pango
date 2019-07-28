@@ -23,8 +23,8 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.42.4
-Release:	3
+Version:	1.44.0
+Release:	1
 License:	LGPLv2+
 Group:		System/Internationalization
 Url:		http://www.pango.org/
@@ -35,15 +35,7 @@ BuildRequires:	pkgconfig(fontconfig) >= 2.5.0
 BuildRequires:	pkgconfig(freetype2) >= 2.1.3
 BuildRequires:	pkgconfig(glib-2.0) >= 2.24
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
-# As of libthai 0.1.28, pango 1.42.4, firefox 66.0.2, pango built with
-# libthai support causes firefox to crash when accessing
-# http://mail.google.com/
-# Please make sure this is fixed before re-enabling libthai
-%if 0
 BuildRequires:	pkgconfig(libthai) >= 0.1.9
-%else
-BuildConflicts: pkgconfig(libthai)
-%endif
 BuildRequires:	pkgconfig(harfbuzz) >= 0.9.3-3
 BuildRequires:	pkgconfig(xft) >= 2.0
 BuildRequires:	pkgconfig(fribidi) >= 0.19.7
@@ -207,7 +199,7 @@ rm -rf %{buildroot}%{_libexecdir}/installed-tests \
 	%{buildroot}%{_datadir}/installed-tests
 
 %files
-%doc README AUTHORS NEWS
+%doc README.md THANKS NEWS
 %{_bindir}/pango-view
 %{_bindir}/pango-list
 %{_mandir}/man1/*
@@ -239,7 +231,7 @@ rm -rf %{buildroot}%{_libexecdir}/installed-tests \
 %endif
 
 %files -n %{devname}
-%doc %{_datadir}/gtk-doc/html/pango
+#doc %{_datadir}/gtk-doc/html/pango
 %{_libdir}/libpango-*.so
 %{_libdir}/pkgconfig/pango.pc
 %if !%{with bootstrap}

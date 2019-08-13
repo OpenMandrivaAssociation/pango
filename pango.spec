@@ -119,7 +119,6 @@ Group:		System/Libraries
 
 %description -n %{girxft}
 GObject Introspection interface description for %{name} - xft.
-%endif
 
 %package -n %{girfc}
 Summary:	GObject Introspection interface description for %{name} - fc
@@ -127,7 +126,6 @@ Group:		System/Libraries
 
 %description -n %{girfc}
 GObject Introspection interface description for %{name} - fc.
-%endif
 
 %package -n %{girot}
 Summary:	GObject Introspection interface description for %{name} - ot

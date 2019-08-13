@@ -13,6 +13,8 @@
 %define gircairo %mklibname %{name}cairo-gir %{api}
 %define girft2 %mklibname %{name}ft2-gir %{api}
 %define girxft %mklibname %{name}xft-gir %{api}
+%define girfc %mklibname %{name}fc-gir %{api}
+%define girot %mklibname %{name}ot-gir %{api}
 
 %define devname %mklibname -d %{name} %{api}
 %define devcairo %mklibname -d %{name}cairo %{api}
@@ -119,6 +121,22 @@ Group:		System/Libraries
 GObject Introspection interface description for %{name} - xft.
 %endif
 
+%package -n %{girfc}
+Summary:	GObject Introspection interface description for %{name} - fc
+Group:		System/Libraries
+
+%description -n %{girxfc}
+GObject Introspection interface description for %{name} - fc.
+%endif
+
+%package -n %{girot}
+Summary:	GObject Introspection interface description for %{name} - ot
+Group:		System/Libraries
+
+%description -n %{girot}
+GObject Introspection interface description for %{name} - ot.
+%endif
+
 %package -n %{devname}
 Summary:	Internationalized text layout and rendering system
 Group:		Development/GNOME and GTK+
@@ -127,6 +145,7 @@ Group:		Development/GNOME and GTK+
 Requires:	%{libname} = %{EVRD}
 %if !%{with bootstrap}
 Requires:	%{girname} = %{EVRD}
+
 %endif
 Conflicts:	%{_lib}pango1.0_0 < 1.28.1-2
 
@@ -228,6 +247,13 @@ rm -rf %{buildroot}%{_libexecdir}/installed-tests \
 
 %files -n %{girxft}
 %{_libdir}/girepository-1.0/PangoXft-%{api}.typelib
+
+%files -n %{girfc}
+%{_libdir}/girepository-1.0/PangoFc-%{api}.typelib
+
+%files -n %{girot}
+%{_libdir}/girepository-1.0/PangoOT-%{api}.typelib
+
 %endif
 
 %files -n %{devname}
@@ -236,6 +262,8 @@ rm -rf %{buildroot}%{_libexecdir}/installed-tests \
 %{_libdir}/pkgconfig/pango.pc
 %if !%{with bootstrap}
 %{_datadir}/gir-1.0/Pango-%{api}.gir
+%{_datadir}/gir-1.0/PangoFc-%{api}.gir
+%{_datadir}/gir-1.0/PangoOT-%{api}.gir
 %endif
 %dir %{_includedir}/pango-1.0
 %dir %{_includedir}/pango-1.0/pango

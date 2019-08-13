@@ -125,7 +125,7 @@ GObject Introspection interface description for %{name} - xft.
 Summary:	GObject Introspection interface description for %{name} - fc
 Group:		System/Libraries
 
-%description -n %{girxfc}
+%description -n %{girfc}
 GObject Introspection interface description for %{name} - fc.
 %endif
 

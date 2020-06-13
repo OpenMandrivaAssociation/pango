@@ -1,0 +1,17 @@
+diff -up pango-1.44.7/utils/viewer-cairo.c.omv~ pango-1.44.7/utils/viewer-cairo.c
+--- pango-1.44.7/utils/viewer-cairo.c.omv~	2020-06-13 20:17:15.926694735 +0200
++++ pango-1.44.7/utils/viewer-cairo.c	2020-06-13 20:18:39.568617278 +0200
+@@ -230,11 +230,11 @@ cairo_vector_view_create (const PangoVie
+     else if (0 == g_ascii_strcasecmp (extension, "svg"))
+       constructor = cairo_svg_surface_create;
+   #endif
+-  #ifdef CAIRO_HAS_PDF_SURFACE
++  #if defined(CAIRO_HAS_PDF_SURFACE) && !defined(__i386__)
+     else if (0 == g_ascii_strcasecmp (extension, "pdf"))
+       constructor = cairo_pdf_surface_create;
+   #endif
+-  #ifdef CAIRO_HAS_PS_SURFACE
++  #if defined(CAIRO_HAS_PS_SURFACE) && !defined(__i386__)
+     else if (0 == g_ascii_strcasecmp (extension, "ps"))
+       constructor = cairo_ps_surface_create;
+    #ifdef HAS_EPS

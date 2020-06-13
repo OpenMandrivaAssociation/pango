@@ -1,0 +1,62 @@
+diff -up pango-1.44.7/pango/break.c.omv~ pango-1.44.7/pango/break.c
+--- pango-1.44.7/pango/break.c.omv~	2020-06-13 20:21:21.528405075 +0200
++++ pango-1.44.7/pango/break.c	2020-06-13 20:24:43.130632393 +0200
+@@ -405,7 +405,7 @@ pango_default_break (const gchar   *text
+                 GB_type = GB_Prepend;
+                 break;
+               }
+-	    /* fall through */
++	    __attribute__((fallthrough));
+ 	  case G_UNICODE_CONTROL:
+ 	  case G_UNICODE_LINE_SEPARATOR:
+ 	  case G_UNICODE_PARAGRAPH_SEPARATOR:
+@@ -421,7 +421,7 @@ pango_default_break (const gchar   *text
+ 		GB_type = GB_ControlCRLF;
+ 		break;
+ 	      }
+-	    /* fall through */
++	    __attribute__((fallthrough));
+ 
+ 	  case G_UNICODE_OTHER_LETTER:
+ 	    if (makes_hangul_syllable)
+@@ -447,6 +447,7 @@ pango_default_break (const gchar   *text
+ 	    break;
+ 
+ 	  case G_UNICODE_ENCLOSING_MARK:
++	    __attribute__((fallthrough));
+ 	  case G_UNICODE_NON_SPACING_MARK:
+ 	    GB_type = GB_Extend; /* Grapheme_Extend */
+ 	    break;
+@@ -594,7 +595,7 @@ pango_default_break (const gchar   *text
+ 		case G_UNICODE_CONTROL:
+ 		  if (wc != 0x000D && wc != 0x000A && wc != 0x000B && wc != 0x000C && wc != 0x0085)
+ 		    break;
+-		  /* fall through */
++		  __attribute__((fallthrough));
+ 		case G_UNICODE_LINE_SEPARATOR:
+ 		case G_UNICODE_PARAGRAPH_SEPARATOR:
+ 		  WB_type = WB_NewlineCRLF; /* CR, LF, Newline */
+diff -up pango-1.44.7/pango/pango-renderer.c.omv~ pango-1.44.7/pango/pango-renderer.c
+--- pango-1.44.7/pango/pango-renderer.c.omv~	2020-06-13 20:24:53.984752360 +0200
++++ pango-1.44.7/pango/pango-renderer.c	2020-06-13 20:25:05.043874595 +0200
+@@ -222,7 +222,7 @@ draw_underline (PangoRenderer *renderer,
+ 				     rect->y + 2 * rect->height,
+ 				     rect->width,
+ 				     rect->height);
+-      /* Fall through */
++      __attribute__((fallthrough));
+     case PANGO_UNDERLINE_SINGLE:
+     case PANGO_UNDERLINE_LOW:
+       pango_renderer_draw_rectangle (renderer,
+diff -up pango-1.44.7/tests/testboundaries_ucd.c.omv~ pango-1.44.7/tests/testboundaries_ucd.c
+--- pango-1.44.7/tests/testboundaries_ucd.c.omv~	2020-06-13 20:25:22.734070133 +0200
++++ pango-1.44.7/tests/testboundaries_ucd.c	2020-06-13 20:25:32.198174749 +0200
+@@ -104,7 +104,7 @@ parse_line (gchar *line,
+         {
+         case 0x00f7: /* DIVISION SIGN: boundary here */
+           temp_attr.bits |= bits.bits;
+-          /* fall through */
++          __attribute__((fallthrough));
+ 
+         case 0x00d7: /* MULTIPLICATION SIGN: no boundary here */
+           break;

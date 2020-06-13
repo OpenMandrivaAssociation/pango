@@ -1,3 +1,7 @@
+# pango is used by gst-plugins-base, which is used by wine
+%ifarch %{x86_64}
+%bcond_without compat32
+%endif
 %define url_ver %(echo %{version}|cut -d. -f1,2)
 %define enable_gtkdoc 1
 
@@ -8,6 +12,11 @@
 %define libcairo %mklibname %{name}cairo %{api} %{major}
 %define libft2 %mklibname %{name}ft2_ %{api} %{major}
 %define libxft %mklibname %{name}xft %{api} %{major}
+
+%define lib32name %mklib32name %{name} %{api} %{major}
+%define lib32cairo %mklib32name %{name}cairo %{api} %{major}
+%define lib32ft2 %mklib32name %{name}ft2_ %{api} %{major}
+%define lib32xft %mklib32name %{name}xft %{api} %{major}
 
 %define girname %mklibname %{name}-gir %{api}
 %define gircairo %mklibname %{name}cairo-gir %{api}
@@ -21,16 +30,27 @@
 %define devft2 %mklibname -d %{name}ft2_ %{api}
 %define devx %mklibname -d %{name}x %{api}
 %define devxft %mklibname -d %{name}xft %{api}
+
+%define dev32name %mklib32name -d %{name} %{api}
+%define dev32cairo %mklib32name -d %{name}cairo %{api}
+%define dev32ft2 %mklib32name -d %{name}ft2_ %{api}
+%define dev32x %mklib32name -d %{name}x %{api}
+%define dev32xft %mklib32name -d %{name}xft %{api}
+
 %bcond_with	bootstrap
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.44.7
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Internationalization
 Url:		http://www.pango.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{url_ver}/%{name}-%{version}.tar.xz
+# Added as Source: rather than Patch: so autosetup doesn't pick it up.
+# This is an arch specific hack.
+Source1:	pango-1.44.7-compile-with-our-cairo32.patch
+Patch0:		pango-1.44.7-fallthrough.patch
 BuildRequires:	meson
 BuildRequires:	pkgconfig(cairo) >= 1.7.6
 BuildRequires:	pkgconfig(fontconfig) >= 2.5.0
@@ -55,6 +75,29 @@ Provides:	pango-modules = %{EVRD}
 Provides:	lib%{name}%{api} = %{EVRD}
 Provides:	lib%{name} = %{EVRD}
 %rename		%{_lib}pango1.0_0-modules
+%if %{with compat32}
+BuildRequires:	devel(libcairo)
+BuildRequires:	devel(libfontconfig)
+BuildRequires:	devel(libexpat)
+BuildRequires:	devel(libuuid)
+BuildRequires:	devel(libfreetype)
+BuildRequires:	devel(libXft)
+BuildRequires:	devel(libglib-2.0)
+BuildRequires:	devel(libharfbuzz)
+BuildRequires:	devel(libatomic)
+BuildRequires:	devel(libfribidi)
+BuildRequires:	devel(libz)
+BuildRequires:	devel(libbz2)
+BuildRequires:	devel(libpng16)
+BuildRequires:	devel(libXrender)
+BuildRequires:	devel(libgobject-2.0)
+BuildRequires:	devel(libpixman-1)
+BuildRequires:	devel(libX11)
+BuildRequires:	devel(libXext)
+BuildRequires:	devel(libxcb)
+BuildRequires:	devel(libXau)
+BuildRequires:	devel(libXdmcp)
+%endif
 
 %description
 A library to handle unicode strings as well as complex bidirectional
@@ -187,10 +230,90 @@ Requires:	%{girxft} = %{version}-%{release}
 This package includes the development library and header files
 for the %{name}xft package.
 
+%if %{with compat32}
+%package -n %{lib32name}
+Summary:	Internationalized text layout and rendering system (32-bit)
+Group:		%{group}
+
+%description -n %{lib32name}
+A library to handle unicode strings as well as complex bidirectional
+or context dependent shaped strings.
+It is the next step on Gtk+ internationalization.
+
+%package -n %{lib32cairo}
+Summary:	Internationalized text layout and rendering system - cairo (32-bit)
+Group:		%{group}
+
+%description -n %{lib32cairo}
+Library for %{name} - cairo.
+
+%package -n %{lib32ft2}
+Summary:	Internationalized text layout and rendering system - ft2 (32-bit)
+Group:		%{group}
+
+%description -n %{lib32ft2}
+Library for %{name} - ft2.
+
+%package -n %{lib32xft}
+Summary:	Internationalized text layout and rendering system - xft (32-bit)
+Group:		%{group}
+
+%description -n %{lib32xft}
+Library for %{name} - xft.
+
+%package -n %{dev32name}
+Summary:	Internationalized text layout and rendering system (32-bit)
+Group:		Development/GNOME and GTK+
+Requires:	%{devname} = %{EVRD}
+Requires:	%{lib32name} = %{EVRD}
+
+%description -n %{dev32name}
+This package includes the development library and header files
+for the %{name} package.
+
+%package -n %{dev32cairo}
+Summary:	Internationalized text layout and rendering system - cairo (32-bit)
+Group:		Development/GNOME and GTK+
+Requires:	%{devcairo} = %{version}-%{release}
+Requires:	%{lib32cairo} = %{version}-%{release}
+
+%description -n %{dev32cairo}
+This package includes the development library and header files
+for the %{name}cairo package.
+
+%package -n %{dev32ft2}
+Summary:	Internationalized text layout and rendering system - ft2 (32-bit)
+Group:		Development/GNOME and GTK+
+Requires:	%{devft2} = %{version}-%{release}
+Requires:	%{lib32ft2} = %{version}-%{release}
+
+%description -n %{dev32ft2}
+This package includes the development library and header files
+for the %{name}ft2 package.
+
+%package -n %{dev32xft}
+Summary:	Internationalized text layout and rendering system - xft (32-bit)
+Group:		Development/GNOME and GTK+
+Requires:	%{devxft} = %{version}-%{release}
+Requires:	%{lib32xft} = %{version}-%{release}
+
+%description -n %{dev32xft}
+This package includes the development library and header files
+for the %{name}xft package.
+%endif
+
 %prep
 %autosetup -p1
+%if %{with compat32}
+patch -p1 -b -z .1~ <%{S:1}
+%meson32 \
+	-Db_ndebug=true \
+	-Dc_std=c11 \
+	-Dgir=false \
+	-Denable_docs=false \
+	-Dintrospection=false
+%endif
 
-%build
 %meson \
 	-Db_ndebug=true \
 	-Dc_std=c11 \
@@ -205,9 +328,16 @@ for the %{name}xft package.
 	-Denable_docs=false \
 %endif
 
+%build
+%if %{with compat32}
+%ninja_build -C build32
+%endif
 %ninja_build -C build
 
 %install
+%if %{with compat32}
+%ninja_install -C build32
+%endif
 %ninja_install -C build
 
 # No need to package the tests, they aren't relevant
@@ -293,3 +423,33 @@ rm -rf %{buildroot}%{_libexecdir}/installed-tests \
 %endif
 %{_includedir}/pango-1.0/pango/pangoxft.h
 %{_includedir}/pango-1.0/pango/pangoxft-render.h
+
+%if %{with compat32}
+%files -n %{lib32name}
+%{_prefix}/lib/libpango-%{api}.so.%{major}*
+
+%files -n %{lib32cairo}
+%{_prefix}/lib/libpangocairo-%{api}.so.%{major}*
+
+%files -n %{lib32ft2}
+%{_prefix}/lib/libpangoft2-%{api}.so.%{major}*
+
+%files -n %{lib32xft}
+%{_prefix}/lib/libpangoxft-%{api}.so.%{major}*
+
+%files -n %{dev32name}
+%{_prefix}/lib/libpango-*.so
+%{_prefix}/lib/pkgconfig/pango.pc
+
+%files -n %{dev32cairo}
+%{_prefix}/lib/libpangocairo*.so
+%{_prefix}/lib/pkgconfig/pangocairo.pc
+
+%files -n %{dev32ft2}
+%{_prefix}/lib/libpangoft2-*.so
+%{_prefix}/lib/pkgconfig/pangoft2.pc
+
+%files -n %{dev32xft}
+%{_prefix}/lib/libpangoxft-*.so
+%{_prefix}/lib/pkgconfig/pangoxft.pc
+%endif

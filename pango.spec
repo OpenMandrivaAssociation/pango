@@ -52,6 +52,8 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{url_ver}/%{name}-%{versi
 Source1:	pango-1.44.7-compile-with-our-cairo32.patch
 Patch0:		pango-1.44.7-fallthrough.patch
 BuildRequires:	meson
+BuildRequires:	cmake
+BuildRequires:	git-core
 BuildRequires:	pkgconfig(cairo) >= 1.7.6
 BuildRequires:	pkgconfig(fontconfig) >= 2.5.0
 BuildRequires:	pkgconfig(freetype2) >= 2.1.3

@@ -58,6 +58,7 @@ BuildRequires:	pkgconfig(cairo) >= 1.7.6
 BuildRequires:	pkgconfig(fontconfig) >= 2.5.0
 BuildRequires:	pkgconfig(freetype2) >= 2.1.3
 BuildRequires:	pkgconfig(glib-2.0) >= 2.24
+BuildRequires:	pkgconfig(gio-2.0) >= 2.24
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libthai) >= 0.1.9
 BuildRequires:	pkgconfig(harfbuzz) >= 0.9.3-3
@@ -85,6 +86,7 @@ BuildRequires:	devel(libuuid)
 BuildRequires:	devel(libfreetype)
 BuildRequires:	devel(libXft)
 BuildRequires:	devel(libglib-2.0)
+BuildRequires:	devel(libgio-2.0)
 BuildRequires:	devel(libharfbuzz)
 BuildRequires:	devel(libatomic)
 BuildRequires:	devel(libfribidi)

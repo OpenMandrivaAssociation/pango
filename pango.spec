@@ -101,6 +101,8 @@ BuildRequires:	devel(libXext)
 BuildRequires:	devel(libxcb)
 BuildRequires:	devel(libXau)
 BuildRequires:	devel(libXdmcp)
+BuildRequires:	devel(libmount)
+BuildRequires:	devel(libblkid)
 %endif
 
 %description

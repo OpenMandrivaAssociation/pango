@@ -41,8 +41,8 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.44.7
-Release:	2
+Version:	1.46.1
+Release:	1
 License:	LGPLv2+
 Group:		System/Internationalization
 Url:		http://www.pango.org/
@@ -388,6 +388,8 @@ rm -rf %{buildroot}%{_libexecdir}/installed-tests \
 #doc %{_datadir}/gtk-doc/html/pango
 %{_libdir}/libpango-*.so
 %{_libdir}/pkgconfig/pango.pc
+%{_libdir}/pkgconfig/pangofc.pc
+%{_libdir}/pkgconfig/pangoot.pc
 %if !%{with bootstrap}
 %{_datadir}/gir-1.0/Pango-%{api}.gir
 %{_datadir}/gir-1.0/PangoFc-%{api}.gir
@@ -440,6 +442,8 @@ rm -rf %{buildroot}%{_libexecdir}/installed-tests \
 %files -n %{dev32name}
 %{_prefix}/lib/libpango-*.so
 %{_prefix}/lib/pkgconfig/pango.pc
+%{_prefix}/lib/pkgconfig/pangofc.pc
+%{_prefix}/lib/pkgconfig/pangoot.pc
 
 %files -n %{dev32cairo}
 %{_prefix}/lib/libpangocairo*.so

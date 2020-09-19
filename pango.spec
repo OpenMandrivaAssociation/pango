@@ -41,7 +41,7 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.46.1
+Version:	1.46.2
 Release:	1
 License:	LGPLv2+
 Group:		System/Internationalization
@@ -314,6 +314,7 @@ for the %{name}xft package.
 patch -p1 -b -z .1~ <%{S:1}
 %meson32 \
 	-Db_ndebug=true \
+	-Dlibthai=disabled \
 	-Dc_std=c11 \
 	-Dgir=false \
 	-Denable_docs=false \

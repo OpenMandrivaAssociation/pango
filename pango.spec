@@ -318,7 +318,7 @@ patch -p1 -b -z .1~ <%{S:1}
 	-Dc_std=c11 \
 	-Dgir=false \
 	-Denable_docs=false \
-	-Dintrospection=false
+	-Dintrospection=disabled
 %endif
 
 %meson \

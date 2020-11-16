@@ -41,7 +41,7 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.46.2
+Version:	1.48.0
 Release:	1
 License:	LGPLv2+
 Group:		System/Internationalization
@@ -318,7 +318,7 @@ patch -p1 -b -z .1~ <%{S:1}
 	-Dc_std=c11 \
 	-Dgir=false \
 	-Denable_docs=false \
-	-Dintrospection=false
+	-Dintrospection=disabled
 %endif
 
 %meson \

@@ -356,6 +356,7 @@ rm -rf %{buildroot}%{_libexecdir}/installed-tests \
 %doc README.md THANKS NEWS
 %{_bindir}/pango-view
 %{_bindir}/pango-list
+%{_bindir}/pango-segmentation
 %{_mandir}/man1/*
 
 %files -n %{libname}

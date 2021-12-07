@@ -65,6 +65,7 @@ BuildRequires:	pkgconfig(harfbuzz) >= 0.9.3-3
 BuildRequires:	pkgconfig(xft) >= 2.0
 BuildRequires:	pkgconfig(fribidi) >= 0.19.7
 BuildRequires:	atomic-devel
+BuildRequires:	python3dist(pygments)
 %if %{enable_gtkdoc}
 BuildRequires:	docbook-style-xsl
 BuildRequires:	docbook-dtd412-xml

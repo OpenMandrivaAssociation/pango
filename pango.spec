@@ -316,23 +316,17 @@ patch -p1 -b -z .1~ <%{S:1}
 	-Db_ndebug=true \
 	-Dlibthai=disabled \
 	-Dc_std=c11 \
-	-Dgir=false \
-	-Denable_docs=false \
+	-Dgtk_doc=false \
 	-Dintrospection=disabled
 %endif
 
 %meson \
 	-Db_ndebug=true \
 	-Dc_std=c11 \
-%if %{with bootstrap}
-	-Dgir=false \
-%else
-	-Dgir=true \
-%endif
 %if %enable_gtkdoc
-	-Denable_docs=true \
+	-Dgtk_doc=true \
 %else
-	-Denable_docs=false \
+	-Dgtk_doc=false \
 %endif
 
 %build

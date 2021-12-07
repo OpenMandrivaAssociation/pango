@@ -65,6 +65,12 @@ BuildRequires:	pkgconfig(harfbuzz) >= 0.9.3-3
 BuildRequires:	pkgconfig(xft) >= 2.0
 BuildRequires:	pkgconfig(fribidi) >= 0.19.7
 BuildRequires:	atomic-devel
+%if %{enable_gtkdoc}
+BuildRequires:	docbook-style-xsl
+BuildRequires:	docbook-dtd412-xml
+BuildRequires:	gtk-doc >= 0.10
+BuildRequires:	xsltproc
+BuildRequires:	python3dist(gi-docgen)
 BuildRequires:	pkgconfig(libmarkdown)
 BuildRequires:	python3dist(pygments)
 BuildRequires:	python3dist(jinja2)
@@ -72,11 +78,6 @@ BuildRequires:	python3dist(markdown)
 BuildRequires:	python3dist(markupsafe)
 BuildRequires:	python3dist(toml)
 BuildRequires:	python3dist(typogrify)
-%if %{enable_gtkdoc}
-BuildRequires:	docbook-style-xsl
-BuildRequires:	docbook-dtd412-xml
-BuildRequires:	gtk-doc >= 0.10
-BuildRequires:	xsltproc
 %endif
 Requires:	%{libname} = %{EVRD}
 # (tpg) get rid of pango-modules

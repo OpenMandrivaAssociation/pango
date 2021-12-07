@@ -41,7 +41,7 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.48.10
+Version:	1.50.0
 Release:	1
 License:	LGPLv2+
 Group:		System/Internationalization
@@ -70,6 +70,14 @@ BuildRequires:	docbook-style-xsl
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gtk-doc >= 0.10
 BuildRequires:	xsltproc
+BuildRequires:	python3dist(gi-docgen)
+BuildRequires:	pkgconfig(libmarkdown)
+BuildRequires:	python3dist(pygments)
+BuildRequires:	python3dist(jinja2)
+BuildRequires:	python3dist(markdown)
+BuildRequires:	python3dist(markupsafe)
+BuildRequires:	python3dist(toml)
+BuildRequires:	python3dist(typogrify)
 %endif
 Requires:	%{libname} = %{EVRD}
 # (tpg) get rid of pango-modules
@@ -316,23 +324,17 @@ patch -p1 -b -z .1~ <%{S:1}
 	-Db_ndebug=true \
 	-Dlibthai=disabled \
 	-Dc_std=c11 \
-	-Dgir=false \
-	-Denable_docs=false \
+	-Dgtk_doc=false \
 	-Dintrospection=disabled
 %endif
 
 %meson \
 	-Db_ndebug=true \
 	-Dc_std=c11 \
-%if %{with bootstrap}
-	-Dgir=false \
-%else
-	-Dgir=true \
-%endif
 %if %enable_gtkdoc
-	-Denable_docs=true \
+	-Dgtk_doc=true \
 %else
-	-Denable_docs=false \
+	-Dgtk_doc=false \
 %endif
 
 %build
@@ -354,6 +356,7 @@ rm -rf %{buildroot}%{_libexecdir}/installed-tests \
 
 %files
 %doc README.md THANKS NEWS
+%doc %{_datadir}/doc/pango/reference/
 %{_bindir}/pango-view
 %{_bindir}/pango-list
 %{_bindir}/pango-segmentation

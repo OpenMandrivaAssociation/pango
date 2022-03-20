@@ -41,7 +41,7 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.50.4
+Version:	1.50.6
 Release:	1
 License:	LGPLv2+
 Group:		System/Internationalization
@@ -356,7 +356,6 @@ rm -rf %{buildroot}%{_libexecdir}/installed-tests \
 
 %files
 %doc README.md THANKS NEWS
-%doc %{_datadir}/doc/pango/reference/
 %{_bindir}/pango-view
 %{_bindir}/pango-list
 %{_bindir}/pango-segmentation
@@ -396,7 +395,9 @@ rm -rf %{buildroot}%{_libexecdir}/installed-tests \
 %endif
 
 %files -n %{devname}
-#doc %{_datadir}/gtk-doc/html/pango
+%doc %{_docdir}/Pango
+%doc %{_docdir}/PangoOT
+%doc %{_docdir}/PangoFc
 %{_libdir}/libpango-*.so
 %{_libdir}/pkgconfig/pango.pc
 %{_libdir}/pkgconfig/pangofc.pc
@@ -413,6 +414,7 @@ rm -rf %{buildroot}%{_libexecdir}/installed-tests \
 %{_includedir}/pango-1.0/pango/pangofc-*.h
 
 %files -n %{devcairo}
+%doc %{_docdir}/PangoCairo
 %{_libdir}/libpangocairo*.so
 %{_libdir}/pkgconfig/pangocairo.pc
 %if !%{with bootstrap}
@@ -421,6 +423,7 @@ rm -rf %{buildroot}%{_libexecdir}/installed-tests \
 %{_includedir}/pango-1.0/pango/pangocairo.h
 
 %files -n %{devft2}
+%doc %{_docdir}/PangoFT2
 %{_libdir}/libpangoft2-*.so
 %{_libdir}/pkgconfig/pangoft2.pc
 %if !%{with bootstrap}
@@ -429,6 +432,7 @@ rm -rf %{buildroot}%{_libexecdir}/installed-tests \
 %{_includedir}/pango-1.0/pango/pangoft2.h
 
 %files -n %{devxft}
+%doc %{_docdir}/PangoXft
 %{_libdir}/libpangoxft-*.so
 %{_libdir}/pkgconfig/pangoxft.pc
 %if !%{with bootstrap}

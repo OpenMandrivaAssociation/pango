@@ -1,0 +1,13 @@
+diff -up pango-1.46.1/pango/break.c.1~ pango-1.46.1/pango/break.c
+--- pango-1.46.1/pango/break.c.1~	2020-08-20 14:14:29.235972200 +0200
++++ pango-1.46.1/pango/break.c	2020-08-21 01:03:23.674873463 +0200
+@@ -451,6 +451,7 @@ pango_default_break (const gchar   *text
+ 	    break;
+ 
+ 	  case G_UNICODE_ENCLOSING_MARK:
++	    __attribute__((fallthrough));
+ 	  case G_UNICODE_NON_SPACING_MARK:
+ 	    GB_type = GB_Extend; /* Grapheme_Extend */
+ 	    break;
+diff -up pango-1.46.1/pango/pango-renderer.c.1~ pango-1.46.1/pango/pango-renderer.c
+diff -up pango-1.46.1/tests/testboundaries_ucd.c.1~ pango-1.46.1/tests/testboundaries_ucd.c

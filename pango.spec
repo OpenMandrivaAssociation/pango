@@ -45,12 +45,12 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.51.2
+Version:	1.52.0
 Release:	1
 License:	LGPLv2+
 Group:		System/Internationalization
-Url:		http://www.pango.org/
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/pango/%{url_ver}/%{name}-%{version}.tar.xz
+Url:		https://www.pango.org/
+Source0:	https://ftp.gnome.org/pub/GNOME/sources/pango/%{url_ver}/%{name}-%{version}.tar.xz
 # Added as Source: rather than Patch: so autosetup doesn't pick it up.
 # This is an arch specific hack.
 Source1:	pango-1.44.7-compile-with-our-cairo32.patch
@@ -66,6 +66,8 @@ BuildRequires:	pkgconfig(gio-2.0) >= 2.24
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(libthai) >= 0.1.9
 BuildRequires:	pkgconfig(harfbuzz) >= 0.9.3-3
+BuildRequires:	pkgconfig(harfbuzz-cairo)
+BuildRequires:	%{_lib}harfbuzz-gir-devel
 BuildRequires:	pkgconfig(xft) >= 2.0
 BuildRequires:	pkgconfig(fribidi) >= 0.19.7
 BuildRequires:	atomic-devel

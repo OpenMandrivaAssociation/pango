@@ -76,6 +76,7 @@ BuildRequires:	docbook-style-xsl
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gtk-doc >= 0.10
 BuildRequires:	xsltproc
+BuildRequires:	python3dist(docutils)
 BuildRequires:	python3dist(gi-docgen)
 BuildRequires:	pkgconfig(libmarkdown)
 BuildRequires:	python3dist(pygments)

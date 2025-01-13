@@ -371,7 +371,7 @@ rm -rf %{buildroot}%{_libexecdir}/installed-tests \
 %{_bindir}/pango-list
 %{_bindir}/pango-segmentation
 %if ! %{with bootstrap}
-%{_mandir}/man1/*
+#{_mandir}/man1/*
 %endif
 
 %files -n %{libname}

@@ -57,6 +57,7 @@ Source1:	pango-1.44.7-compile-with-our-cairo32.patch
 Patch0:		pango-1.44.7-fallthrough.patch
 BuildRequires:	meson
 BuildRequires:	cmake
+BuildRequires:	gettext
 BuildRequires:	git-core
 BuildRequires:	pkgconfig(cairo) >= 1.7.6
 BuildRequires:	pkgconfig(fontconfig) >= 2.5.0

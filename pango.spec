@@ -75,6 +75,7 @@ BuildRequires:	atomic-devel
 %if %{enable_gtkdoc}
 BuildRequires:	docbook-style-xsl
 BuildRequires:	docbook-dtd412-xml
+BuildRequires:	docbook-utils-pdf
 BuildRequires:	gtk-doc >= 0.10
 BuildRequires:	xsltproc
 BuildRequires:	python3dist(docutils)

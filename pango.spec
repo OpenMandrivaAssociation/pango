@@ -45,7 +45,7 @@
 
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
-Version:	1.56.4
+Version:	1.57.0
 Release:	1
 License:	LGPLv2+
 Group:		System/Internationalization
@@ -57,6 +57,7 @@ Source1:	pango-1.44.7-compile-with-our-cairo32.patch
 Patch0:		pango-1.44.7-fallthrough.patch
 BuildRequires:	meson
 BuildRequires:	cmake
+BuildRequires:	gettext
 BuildRequires:	git-core
 BuildRequires:	pkgconfig(cairo) >= 1.7.6
 BuildRequires:	pkgconfig(fontconfig) >= 2.5.0
@@ -74,6 +75,7 @@ BuildRequires:	atomic-devel
 %if %{enable_gtkdoc}
 BuildRequires:	docbook-style-xsl
 BuildRequires:	docbook-dtd412-xml
+BuildRequires:	docbook-utils-pdf
 BuildRequires:	gtk-doc >= 0.10
 BuildRequires:	xsltproc
 BuildRequires:	python3dist(docutils)

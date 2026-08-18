@@ -329,6 +329,9 @@ for the %{name}xft package.
 
 %prep
 %autosetup -p1
+# G_DEFINE_TYPE parent-class pointers trip clang -Wunused-but-set-global;
+# meson adds -Werror=unused-but-set-variable after RPM CFLAGS, so fix it there.
+sed -i "s/'-Werror=unused-but-set-variable',/'-Werror=unused-but-set-variable', '-Wno-error=unused-but-set-global',/" meson.build
 %if %{with compat32}
 patch -p1 -b -z .1~ <%{S:1}
 %meson32 \

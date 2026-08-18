@@ -1,3 +1,5 @@
+%global optflags %{optflags} -Wno-unused-but-set-variable -Wno-unused-but-set-global
+
 # pango is used by gst-plugins-base, which is used by wine
 %ifarch %{x86_64}
 %bcond_without compat32

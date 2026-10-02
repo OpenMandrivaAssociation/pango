@@ -48,7 +48,7 @@
 Summary:	System for layout and rendering of internationalized text
 Name:		pango
 Version:	1.58.2
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Internationalization
 Url:		https://www.pango.org/
@@ -122,6 +122,11 @@ BuildRequires:	devel(libXau)
 BuildRequires:	devel(libXdmcp)
 BuildRequires:	devel(libmount)
 BuildRequires:	devel(libblkid)
+BuildRequires:	cross-i686-openmandriva-linux-gnu-binutils
+BuildRequires:	cross-i686-openmandriva-linux-gnu-libc
+BuildRequires:	cross-i686-openmandriva-linux-gnu-gcc
+BuildRequires:	cross-i686-openmandriva-linux-gnu-kernel-headers
+BuildRequires:	cross-i686-openmandriva-linux-gnu-clang
 %endif
 
 %description
